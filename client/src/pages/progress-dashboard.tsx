@@ -157,17 +157,17 @@ export default function ProgressDashboard() {
             <button className="btn-purple px-3 py-2 text-sm">Take Pulse</button>
           </div>
           
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex justify-between items-center mb-3">
-              <span className="text-sm text-gray-600">Current Level</span>
-              <span className="font-semibold text-purple-600">{currentConfidence}%</span>
+          <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border-2 border-purple-200">
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-sm font-medium text-gray-700">Current Level</span>
+              <span className="font-bold text-purple-700 text-lg">{currentConfidence}%</span>
             </div>
-            <div className="progress-bar h-3 mb-3">
+            <div className="progress-bar h-4 mb-4">
               <div className="progress-fill" style={{ width: `${currentConfidence}%` }}></div>
             </div>
-            <div className="flex justify-between text-xs text-gray-500 mb-4">
-              <span>vs Baseline</span>
-              <span className="text-green-600 font-medium">↗ +{confidenceGain}%</span>
+            <div className="flex justify-between text-sm text-gray-600 mb-4">
+              <span className="font-medium">vs Baseline</span>
+              <span className="text-green-600 font-bold bg-green-50 px-2 py-1 rounded-full">↗ +{confidenceGain}%</span>
             </div>
             
             {/* Simple confidence trend */}
@@ -209,13 +209,24 @@ export default function ProgressDashboard() {
           </div>
           <p className="text-sm mb-3">Keep your momentum going</p>
           
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm">Applications this week</span>
               <span className="font-semibold">{weeklyApplications}/{targetApplications}</span>
             </div>
+            
+            {/* Progress bar for weekly applications */}
+            <div className="w-full">
+              <div className="h-3 bg-white/30 rounded-full overflow-hidden border border-white/40">
+                <div 
+                  className="h-full bg-white rounded-full transition-all duration-500 ease-out shadow-sm"
+                  style={{ width: `${Math.min((weeklyApplications / targetApplications) * 100, 100)}%` }}
+                />
+              </div>
+            </div>
+            
             <div className="flex items-center space-x-2">
-              <span className="text-sm">{targetApplications - weeklyApplications} more to unlock finish-challenge coupon</span>
+              <span className="text-sm">{targetApplications - weeklyApplications > 0 ? `${targetApplications - weeklyApplications} more to unlock finish-challenge coupon` : 'Challenge completed! 🎉'}</span>
             </div>
             <div className="flex items-center space-x-2 mt-2">
               <Clock className="w-4 h-4" />
