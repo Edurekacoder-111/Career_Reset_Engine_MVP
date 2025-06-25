@@ -10,6 +10,9 @@ export default function Discovery() {
   const [education, setEducation] = useState("");
   const [workExperience, setWorkExperience] = useState("");
   const [achievements, setAchievements] = useState<string[]>([]);
+  const [customAchievements, setCustomAchievements] = useState<string[]>(["", "", ""]);
+  const [achievementMode, setAchievementMode] = useState<"select" | "custom">("select");
+  const [selectedCategory, setSelectedCategory] = useState<"all" | "professional" | "academic" | "personal">("all");
   const [coreSkills, setCoreSkills] = useState<string[]>([]);
   const [showNarrative, setShowNarrative] = useState(false);
   const [showTrainingModal, setShowTrainingModal] = useState(false);
@@ -24,9 +27,24 @@ export default function Discovery() {
   }, [userId, setLocation]);
 
   const achievementOptions = [
-    { id: "campaign", title: "Led Digital Campaign", description: "Increased brand engagement by 45% across social platforms" },
-    { id: "team", title: "Team Management", description: "Managed cross-functional team of 8 members" },
-    { id: "revenue", title: "Revenue Growth", description: "Contributed to 30% revenue increase in Q3" },
+    // Professional achievements
+    { id: "campaign", title: "Led Digital Campaign", description: "Increased brand engagement by 45% across social platforms", category: "professional" },
+    { id: "team", title: "Team Management", description: "Managed cross-functional team of 8 members", category: "professional" },
+    { id: "revenue", title: "Revenue Growth", description: "Contributed to 30% revenue increase in Q3", category: "professional" },
+    { id: "process", title: "Process Improvement", description: "Streamlined workflows reducing task completion time by 25%", category: "professional" },
+    { id: "client", title: "Client Relations", description: "Maintained 95% client satisfaction rate over 2 years", category: "professional" },
+    
+    // Academic/Educational achievements
+    { id: "academic_honor", title: "Academic Excellence", description: "Graduated with honors or maintained high GPA", category: "academic" },
+    { id: "research", title: "Research Project", description: "Completed significant research or thesis project", category: "academic" },
+    { id: "leadership_school", title: "Student Leadership", description: "Led student organizations or academic initiatives", category: "academic" },
+    { id: "scholarship", title: "Scholarship/Award", description: "Received academic scholarships or recognition", category: "academic" },
+    
+    // Personal/Volunteer achievements
+    { id: "volunteer", title: "Volunteer Work", description: "Organized community events or charity initiatives", category: "personal" },
+    { id: "personal_project", title: "Personal Project", description: "Built something meaningful in your spare time", category: "personal" },
+    { id: "skill_cert", title: "Skill Certification", description: "Earned professional certifications or completed courses", category: "personal" },
+    { id: "creative", title: "Creative Achievement", description: "Won competitions, published work, or creative recognition", category: "personal" },
   ];
 
   const skillOptions = [
@@ -41,11 +59,34 @@ export default function Discovery() {
   ];
 
   const toggleAchievement = (achievementId: string) => {
-    setAchievements(prev => 
-      prev.includes(achievementId) 
-        ? prev.filter(id => id !== achievementId)
-        : [...prev, achievementId]
-    );
+    setAchievements(prev => {
+      if (prev.includes(achievementId)) {
+        return prev.filter(id => id !== achievementId);
+      } else if (prev.length < 3) {
+        return [...prev, achievementId];
+      }
+      return prev;
+    });
+  };
+
+  const updateCustomAchievement = (index: number, value: string) => {
+    setCustomAchievements(prev => {
+      const updated = [...prev];
+      updated[index] = value;
+      return updated;
+    });
+  };
+
+  const getFilteredAchievements = () => {
+    if (selectedCategory === "all") return achievementOptions;
+    return achievementOptions.filter(achievement => achievement.category === selectedCategory);
+  };
+
+  const getSelectedAchievementsCount = () => {
+    if (achievementMode === "custom") {
+      return customAchievements.filter(achievement => achievement.trim() !== "").length;
+    }
+    return achievements.length;
   };
 
   const toggleCoreSkill = (skill: string) => {
@@ -66,13 +107,31 @@ export default function Discovery() {
   const handleContinue = () => {
     if (!userId) return;
     
+    // Prepare achievements data based on current mode
+    const achievementsData = achievementMode === "custom" 
+      ? customAchievements.filter(a => a.trim() !== "").map((achievement, index) => ({
+          id: `custom_${index}`,
+          title: `Achievement ${index + 1}`,
+          description: achievement,
+          category: "custom"
+        }))
+      : achievementOptions.filter(a => achievements.includes(a.id));
+
+    // Check if user has at least one achievement
+    const hasAchievements = achievementsData.length > 0;
+    
+    if (!hasAchievements) {
+      alert("Please select or write at least one achievement before continuing.");
+      return;
+    }
+    
     updateProgress({
       updates: {
         currentPhase: 2,
-        narrative: "A marketing professional with 5+ years experience in digital campaigns and brand strategy. Proven track record in increasing engagement rates by 40% and managing cross-functional teams...",
-        achievements: achievementOptions.filter(a => achievements.includes(a.id)),
+        narrative: "A professional with diverse experiences and proven achievements. Demonstrated ability to deliver results and contribute meaningfully across different contexts...",
+        achievements: achievementsData,
         coreSkills,
-        storyScore: 72,
+        storyScore: Math.min(72 + (achievementsData.length * 5), 95),
       }
     });
     
@@ -157,30 +216,129 @@ export default function Discovery() {
 
         {/* Top 3 Achievements */}
         <div className="mb-6">
-          <h3 className="font-semibold text-gray-900 mb-4">Select Your Top 3 Achievements</h3>
-          <div className="space-y-3">
-            {achievementOptions.map((achievement) => (
-              <label
-                key={achievement.id}
-                className={`flex items-start space-x-3 p-3 border rounded-lg cursor-pointer transition-colors ${
-                  achievements.includes(achievement.id)
-                    ? "border-purple-600 bg-purple-50"
-                    : "border-gray-200 hover:border-purple-600"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={achievements.includes(achievement.id)}
-                  onChange={() => toggleAchievement(achievement.id)}
-                  className="mt-1"
-                />
-                <div>
-                  <div className="font-medium text-gray-900">{achievement.title}</div>
-                  <div className="text-sm text-gray-600">{achievement.description}</div>
-                </div>
-              </label>
-            ))}
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold text-gray-900">Select Your Top 3 Achievements</h3>
+            <div className="text-sm text-purple-600 font-medium">
+              {getSelectedAchievementsCount()}/3 selected
+            </div>
           </div>
+          
+          {/* Mode Toggle */}
+          <div className="flex bg-gray-100 p-1 rounded-lg mb-4">
+            <button
+              onClick={() => setAchievementMode("select")}
+              className={`flex-1 py-2 px-3 rounded text-sm font-medium transition-colors ${
+                achievementMode === "select"
+                  ? "bg-white text-purple-600 shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              Choose from Examples
+            </button>
+            <button
+              onClick={() => setAchievementMode("custom")}
+              className={`flex-1 py-2 px-3 rounded text-sm font-medium transition-colors ${
+                achievementMode === "custom"
+                  ? "bg-white text-purple-600 shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              Write Your Own
+            </button>
+          </div>
+
+          {achievementMode === "select" ? (
+            <div>
+              {/* Category Filter */}
+              <div className="flex space-x-2 mb-4 overflow-x-auto">
+                {[
+                  { key: "all", label: "All" },
+                  { key: "professional", label: "Work" },
+                  { key: "academic", label: "School" },
+                  { key: "personal", label: "Personal" }
+                ].map(category => (
+                  <button
+                    key={category.key}
+                    onClick={() => setSelectedCategory(category.key as any)}
+                    className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+                      selectedCategory === category.key
+                        ? "bg-purple-600 text-white"
+                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    }`}
+                  >
+                    {category.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Achievement Options */}
+              <div className="space-y-3 max-h-80 overflow-y-auto">
+                {getFilteredAchievements().map((achievement) => (
+                  <label
+                    key={achievement.id}
+                    className={`flex items-start space-x-3 p-4 border rounded-xl cursor-pointer transition-all ${
+                      achievements.includes(achievement.id)
+                        ? "border-purple-600 bg-purple-50 shadow-sm"
+                        : "border-gray-200 hover:border-purple-300 hover:bg-gray-50"
+                    } ${achievements.length >= 3 && !achievements.includes(achievement.id) ? "opacity-50 cursor-not-allowed" : ""}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={achievements.includes(achievement.id)}
+                      onChange={() => toggleAchievement(achievement.id)}
+                      className="mt-1 h-4 w-4 text-purple-600 rounded border-gray-300 focus:ring-purple-500"
+                      disabled={achievements.length >= 3 && !achievements.includes(achievement.id)}
+                    />
+                    <div className="flex-1">
+                      <div className="font-medium text-gray-900">{achievement.title}</div>
+                      <div className="text-sm text-gray-600 mt-1">{achievement.description}</div>
+                      <div className={`inline-block px-2 py-1 rounded-full text-xs font-medium mt-2 ${
+                        achievement.category === "professional" ? "bg-blue-100 text-blue-700" :
+                        achievement.category === "academic" ? "bg-green-100 text-green-700" :
+                        "bg-orange-100 text-orange-700"
+                      }`}>
+                        {achievement.category}
+                      </div>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <p className="text-sm text-gray-600 mb-4">
+                Write about your achievements, experiences, or things you're proud of. These can be from work, school, personal projects, or life experiences.
+              </p>
+              
+              {customAchievements.map((achievement, index) => (
+                <div key={index}>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Achievement {index + 1} {index === 0 ? "(Required)" : "(Optional)"}
+                  </label>
+                  <textarea
+                    value={achievement}
+                    onChange={(e) => updateCustomAchievement(index, e.target.value)}
+                    placeholder={
+                      index === 0 ? "e.g., Completed my degree while working part-time..." :
+                      index === 1 ? "e.g., Organized a successful fundraiser for local charity..." :
+                      "e.g., Built a personal website to showcase my work..."
+                    }
+                    className="w-full p-3 border border-gray-300 rounded-lg h-20 resize-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    maxLength={200}
+                  />
+                  <div className="text-xs text-gray-500 mt-1">
+                    {achievement.length}/200 characters
+                  </div>
+                </div>
+              ))}
+              
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <p className="text-sm text-blue-800">
+                  <strong>Tip:</strong> Focus on results and impact. What did you accomplish? How did it help others or improve a situation?
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Skill-Map Wizard */}

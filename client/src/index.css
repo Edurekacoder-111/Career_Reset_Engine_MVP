@@ -132,6 +132,34 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Responsive achievement cards */
+@media (max-width: 640px) {
+  .achievement-card {
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  
+  .achievement-textarea {
+    min-height: 80px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .category-filter {
+    gap: 8px;
+    padding-bottom: 8px;
+  }
+  
+  .mode-toggle {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .mode-toggle button {
+    width: 100%;
+    padding: 12px 16px;
+  }
+}
+
 /* Button styles */
 .btn-purple {
   background: var(--brand-purple);
