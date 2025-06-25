@@ -76,7 +76,7 @@ export class MemStorage implements IStorage {
         title: "Digital Marketing Manager",
         company: "TechCorp Inc.",
         location: "Remote",
-        salaryRange: "$75k-$85k",
+        salaryRange: "₹8L-₹12L",
         matchPercentage: 92,
         status: "available",
         description: "Lead digital marketing campaigns and strategy for a growing tech company."
@@ -85,7 +85,7 @@ export class MemStorage implements IStorage {
         title: "Brand Strategy Specialist",
         company: "CreativeHub",
         location: "Hybrid",
-        salaryRange: "$65k-$85k",
+        salaryRange: "₹6L-₹10L",
         matchPercentage: 88,
         status: "pending",
         description: "Develop and execute brand strategies for creative agency clients."
@@ -94,7 +94,7 @@ export class MemStorage implements IStorage {
         title: "Content Marketing Lead",
         company: "StartupX",
         location: "On-site",
-        salaryRange: "$70k-$90k",
+        salaryRange: "₹7L-₹14L",
         matchPercentage: 85,
         status: "available",
         description: "Lead content marketing initiatives and team for fast-growing startup."

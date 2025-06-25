@@ -122,10 +122,11 @@ export default function ApplicationBuilder() {
                   </span>
                   <button
                     disabled={role.matchPercentage < 90}
-                    className={`px-4 py-2 rounded text-sm font-medium ${
+                    onClick={() => role.matchPercentage >= 90 && handleEasyApply()}
+                    className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
                       role.matchPercentage >= 90
-                        ? "bg-purple-600 text-white"
-                        : "bg-gray-300 text-gray-600"
+                        ? "bg-purple-600 hover:bg-purple-700 text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
                     }`}
                   >
                     {role.matchPercentage >= 90 ? "Build Application" : "Locked"}
@@ -154,14 +155,14 @@ export default function ApplicationBuilder() {
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
             </div>
             
-            <div className="flex space-x-2">
-              <button className="flex items-center space-x-2 btn-purple px-4 py-2 text-sm">
-                <Download className="w-4 h-4" />
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button className="flex items-center justify-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                <Download className="w-5 h-5" />
                 <span>Download PDF</span>
               </button>
-              <button className="flex items-center space-x-2 border border-purple-600 text-purple-600 px-4 py-2 rounded text-sm">
-                <Edit className="w-4 h-4" />
-                <span>Edit</span>
+              <button className="flex items-center justify-center space-x-2 border-2 border-purple-600 text-purple-600 hover:bg-purple-50 px-6 py-3 rounded-lg font-semibold transition-all duration-200">
+                <Edit className="w-5 h-5" />
+                <span>Edit Resume</span>
               </button>
             </div>
           </div>
@@ -182,8 +183,8 @@ export default function ApplicationBuilder() {
               [Auto-generated content continues...]
             </p>
             
-            <button className="flex items-center space-x-2 border border-purple-600 text-purple-600 px-4 py-2 rounded text-sm">
-              <Edit className="w-4 h-4" />
+            <button className="flex items-center justify-center space-x-2 border-2 border-orange-500 text-orange-600 hover:bg-orange-50 px-6 py-3 rounded-lg font-semibold transition-all duration-200 w-full sm:w-auto">
+              <Edit className="w-5 h-5" />
               <span>Edit Cover Letter</span>
             </button>
           </div>
@@ -208,22 +209,30 @@ export default function ApplicationBuilder() {
               </div>
             </div>
             
-            <div className="flex space-x-2 mb-4">
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
               <button
                 onClick={handleEasyApply}
                 disabled={createApplicationMutation.isPending}
-                className="flex items-center space-x-2 btn-green px-4 py-2 text-sm flex-1"
+                className={`flex items-center justify-center space-x-3 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 flex-1 ${
+                  createApplicationMutation.isPending
+                    ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                    : "bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                }`}
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-6 h-6" />
                 <span>{createApplicationMutation.isPending ? "Sending..." : "EasyApply"}</span>
               </button>
               <button
                 onClick={handleEmailSubmit}
                 disabled={createApplicationMutation.isPending}
-                className="flex items-center space-x-2 border border-gray-300 text-gray-700 px-4 py-2 rounded text-sm flex-1"
+                className={`flex items-center justify-center space-x-3 px-8 py-4 rounded-xl font-bold text-lg border-2 transition-all duration-200 flex-1 ${
+                  createApplicationMutation.isPending
+                    ? "border-gray-300 text-gray-400 cursor-not-allowed"
+                    : "border-blue-500 text-blue-600 hover:bg-blue-50 hover:border-blue-600"
+                }`}
               >
-                <Mail className="w-4 h-4" />
-                <span>Email</span>
+                <Mail className="w-6 h-6" />
+                <span>Email Application</span>
               </button>
             </div>
             
@@ -295,9 +304,15 @@ export default function ApplicationBuilder() {
         <button
           onClick={handleStartApplication2}
           disabled={isUpdating}
-          className="w-full btn-purple py-3"
+          className={`w-full px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 ${
+            isUpdating
+              ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+              : "bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          }`}
         >
-          {isUpdating ? "Saving..." : "Start Application #2 →"}
+          <span className="flex items-center justify-center space-x-2">
+            {isUpdating ? "Saving..." : "Start Application #2 →"}
+          </span>
         </button>
       </div>
     </div>
