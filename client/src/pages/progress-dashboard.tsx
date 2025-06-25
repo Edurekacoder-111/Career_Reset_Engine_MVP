@@ -67,15 +67,15 @@ export default function ProgressDashboard() {
         gradientClass="gradient-purple"
       />
 
-      <div className="p-4">
+      <div className="content-container">
         {/* Application Pipeline (Kanban) */}
-        <div className="mb-6">
-          <div className="flex items-center space-x-2 mb-4">
-            <Columns className="w-5 h-5 text-purple-600" />
-            <h2 className="font-bold text-gray-900">Application Pipeline</h2>
+        <div className="section-spacing">
+          <div className="flex items-center space-x-2 md:space-x-3 mb-4 md:mb-6">
+            <Columns className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
+            <h2 className="text-responsive-lg font-bold text-gray-900">Application Pipeline</h2>
           </div>
           
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {/* Sent Column */}
             <div className="kanban-column kanban-sent">
               <div className="flex items-center justify-between mb-3">

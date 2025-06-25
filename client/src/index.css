@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Responsive foundation */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);
@@ -132,44 +156,224 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive design improvements */
+/* Comprehensive responsive design */
+
+/* Mobile-first approach - Base styles for mobile */
+.container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+/* Typography responsive scaling */
+.text-responsive-lg {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.text-responsive-md {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.text-responsive-sm {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Button responsive styles */
+.btn-mobile-friendly {
+  min-height: 48px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-large {
+  min-height: 56px;
+  padding: 16px 24px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Card responsive styles */
+.card-responsive {
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Form responsive styles */
+.form-responsive {
+  gap: 16px;
+}
+
+.input-responsive {
+  font-size: 16px; /* Prevents zoom on iOS */
+  padding: 12px 16px;
+  border-radius: 8px;
+  min-height: 48px;
+}
+
+/* Navigation responsive */
+.nav-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Breakpoint: Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+    padding: 0 20px;
+  }
+  
+  .text-responsive-lg {
+    font-size: 1.75rem;
+  }
+  
+  .card-responsive {
+    padding: 20px;
+  }
+}
+
+/* Breakpoint: Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+    padding: 0 24px;
+  }
+  
+  .text-responsive-lg {
+    font-size: 2rem;
+  }
+  
+  .btn-mobile-friendly {
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 15px;
+  }
+  
+  .btn-large {
+    min-height: 52px;
+    padding: 14px 28px;
+    font-size: 17px;
+  }
+  
+  .card-responsive {
+    padding: 24px;
+  }
+  
+  /* Grid layouts for tablets */
+  .grid-tablet-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Breakpoint: Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+    padding: 0 32px;
+  }
+  
+  .text-responsive-lg {
+    font-size: 2.25rem;
+  }
+  
+  /* Grid layouts for desktop */
+  .grid-desktop-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  .grid-desktop-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Breakpoint: Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  
+  .text-responsive-lg {
+    font-size: 2.5rem;
+  }
+}
+
+/* Mobile-specific styles (max-width: 640px) */
 @media (max-width: 640px) {
+  /* Achievement cards */
   .achievement-card {
-    padding: 12px 16px;
-    margin-bottom: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 12px;
   }
   
   .achievement-textarea {
-    min-height: 80px;
-    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 100px;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 8px;
   }
   
+  /* Category filters */
   .category-filter {
     gap: 8px;
-    padding-bottom: 8px;
+    padding-bottom: 12px;
+    flex-wrap: wrap;
   }
   
+  .category-filter button {
+    padding: 8px 16px;
+    font-size: 14px;
+    min-height: 40px;
+  }
+  
+  /* Mode toggles */
   .mode-toggle {
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    width: 100%;
   }
   
   .mode-toggle button {
     width: 100%;
-    padding: 12px 16px;
+    padding: 16px 20px;
+    font-size: 16px;
+    min-height: 52px;
   }
   
-  /* Application builder responsive improvements */
+  /* Application builder */
   .application-buttons {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
   
   .application-button {
     width: 100%;
     padding: 16px 24px;
     font-size: 16px;
-    min-height: 56px; /* Better touch target */
+    min-height: 56px;
+    border-radius: 12px;
   }
   
   .resume-actions {
@@ -180,6 +384,7 @@
   .role-card {
     padding: 16px;
     margin-bottom: 16px;
+    border-radius: 12px;
   }
   
   .role-card-actions {
@@ -188,28 +393,130 @@
     margin-top: 16px;
   }
   
-  /* Better button spacing on mobile */
-  .btn-responsive {
-    min-height: 48px;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
+  /* Header adjustments */
+  .header-mobile {
+    padding: 16px;
+    text-align: center;
   }
   
-  /* Improved touch targets */
+  .header-title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  
+  .header-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+  
+  /* Progress indicators */
+  .progress-mobile {
+    margin: 16px 0;
+  }
+  
+  .progress-bar {
+    height: 8px;
+    border-radius: 4px;
+  }
+  
+  /* Cards and containers */
+  .content-container {
+    padding: 16px;
+    max-width: 100%;
+  }
+  
+  /* Forms */
+  .form-container {
+    padding: 20px 16px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .form-input {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    min-height: 48px;
+  }
+  
+  /* Touch-friendly elements */
   button {
     min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   
   input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+  }
+  
+  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
   }
   
   /* Salary range styling for Indian market */
   .salary-range {
     font-weight: 600;
-    color: #059669; /* Green color for INR */
+    color: #059669;
+    font-size: 0.9rem;
+  }
+  
+  /* Navigation improvements */
+  .mobile-nav {
+    padding: 12px 16px;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  
+  .mobile-nav-button {
+    padding: 8px;
+    border-radius: 6px;
+    min-height: 40px;
+    min-width: 40px;
+  }
+  
+  /* Spacing improvements */
+  .section-spacing {
+    margin-bottom: 24px;
+  }
+  
+  .element-spacing {
+    margin-bottom: 16px;
+  }
+  
+  /* Text improvements */
+  .text-mobile-lg {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  
+  .text-mobile-md {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .text-mobile-sm {
+    font-size: 0.875rem;
+    line-height: 1.6;
   }
 }
 

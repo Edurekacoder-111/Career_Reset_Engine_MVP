@@ -54,31 +54,31 @@ export default function Landing() {
         gradientClass="gradient-purple"
       />
 
-      <div className="p-6 text-center">
-        <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <HelpCircle className="w-8 h-8 text-purple-600" />
+      <div className="content-container text-center">
+        <div className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8">
+          <HelpCircle className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 text-purple-600" />
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Feeling Stuck in Your Career?</h1>
-        <p className="text-gray-600 mb-8">Take our 90-second diagnostic to discover your path forward</p>
+        <h1 className="text-responsive-lg font-bold text-gray-900 mb-4 md:mb-6">Feeling Stuck in Your Career?</h1>
+        <p className="text-gray-600 mb-8 md:mb-12 text-sm md:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">Take our 90-second diagnostic to discover your path forward</p>
         
-        <div className="space-y-4 text-left">
+        <div className="space-y-6 md:space-y-8 text-left max-w-lg mx-auto">
           <ConfidenceSlider
             value={confidence}
             onChange={setConfidence}
             label="How confident are you about your career direction?"
           />
 
-          <div className="p-4 border border-gray-200 rounded-lg">
-            <p className="font-medium mb-3">How long have you been preparing for a career change?</p>
-            <div className="grid grid-cols-2 gap-2">
+          <div className="card-responsive">
+            <p className="font-semibold mb-4 md:mb-6 text-responsive-md">How long have you been preparing for a career change?</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {timeframeOptions.map((option) => (
                 <button
                   key={option}
                   onClick={() => setTimeframe(option)}
-                  className={`p-3 border rounded-lg text-sm transition-colors ${
+                  className={`btn-mobile-friendly text-sm md:text-base rounded-xl border-2 transition-all duration-200 ${
                     timeframe === option
-                      ? "border-purple-600 bg-purple-50 text-purple-600"
-                      : "border-gray-200 hover:border-purple-600"
+                      ? "border-purple-600 bg-purple-50 text-purple-600 shadow-md"
+                      : "border-gray-300 hover:border-purple-400 hover:bg-gray-50"
                   }`}
                 >
                   {option}
@@ -88,13 +88,13 @@ export default function Landing() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-8">
+        <form onSubmit={handleSubmit} className="mt-8 md:mt-12 form-responsive max-w-md mx-auto">
           <input
             type="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+            className="form-input mb-4"
             required
           />
           <input
@@ -102,12 +102,12 @@ export default function Landing() {
             placeholder="WhatsApp number (optional)"
             value={whatsapp}
             onChange={(e) => setWhatsapp(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+            className="form-input mb-6"
           />
           <button
             type="submit"
             disabled={createUserMutation.isPending}
-            className="w-full btn-purple py-4"
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white btn-large rounded-xl font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
             {createUserMutation.isPending ? "Creating Account..." : "Start My Career Reset Journey"}
           </button>

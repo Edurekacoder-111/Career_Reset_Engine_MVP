@@ -93,10 +93,10 @@ export default function ApplicationBuilder() {
         gradientClass="gradient-green"
       />
 
-      <div className="p-4">
+      <div className="content-container">
         {/* Selected Roles */}
-        <div className="mb-6">
-          <h2 className="font-bold text-gray-900 mb-4">Your Selected Roles</h2>
+        <div className="section-spacing">
+          <h2 className="text-responsive-lg font-bold text-gray-900 mb-4 md:mb-6">Your Selected Roles</h2>
           
           <div className="space-y-3">
             {roles.slice(0, 2).map((role) => (
