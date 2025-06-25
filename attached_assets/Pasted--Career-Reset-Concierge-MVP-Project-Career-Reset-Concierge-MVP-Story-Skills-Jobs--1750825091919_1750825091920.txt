@@ -1,0 +1,89 @@
+# Career-Reset Concierge MVP
+
+**Project**  
+Career-Reset Concierge MVP (Story ➜ Skills ➜ Jobs)
+
+---
+
+
+### Phase 0 ▸ Awareness & Account Create
+- **Ad/referral** → mini-site → 90-sec “Stuck?” diagnostic  
+- **Capture** email + WhatsApp → choose 7-day start-window → account created  
+
+### Phase 1 ▸ Guided On-Boarding
+- **60 sec explainer:** “From Being lost to Getting  real Job Applications”  
+- **Baseline pulse:** confidence slider(with emojis of reaction), years prepped, subjects mastered  
+
+
+
+### Phase 2 ▸ Discovery Sprint (auto-unlocks Day 1)
+1. **AI Questionnaire** pre-fills exam background → **Draft Narrative v0**  
+2. **User Edits** & selects top 3 achievements  
+   - *12 h idle* → smart nudge  
+3. **Skill-Map Wizard**  
+   - GPT suggests 6–8 market skills → drag 3 into “core stack”  
+   - **Skill-Gap Badges** auto-generated (e.g., Policy Analytics  40 %)  
+4. **Checkpoint** → Story Clarity Score (0–100)  
+5. **Training Track Teaser**  
+   > “Close your Skill-Gap Badges with curated micro-projects.” 
+
+
+### Phase 3 ▸ Role Matching
+- **GPT Role Finder** → 8–10 matched roles with **Match %** &  Skill-Gap badges  
+- **Shortlist** up to 3 → saved as Role Cards (JD + tips)  
+- *24 h idle* → motivational push (“2 new roles spotted!”)  
+- **Training Track Promo** 🔒 (Wait-List)
+- Mentor feedback module shown but 🔒(Waitlist)(Enter your email and make yourself wailisted for updates)
+
+
+### Phase 4 ▸ Application Builder
+1. **Resume-in-a-Click** (Narrative + Skills → PDF)  
+2. **Cover Letter** auto-draft → inline edit  
+3. **Submit Application** (EasyApply/email stub) → log + screenshot opt.  
+4. **Repeat** for App #2  
+   - *48 h streak* → badge + confetti
+
+### Phase 5 ▸ Progress Dashboard
+- **Kanban:** Sent → Viewed → Interview  
+- **Confidence Graph** vs baseline (pulse every 3 days)  
+- *< 2 apps after 5 days* → finish-challenge coupon  
+- **Training Track Panel(Improve your skills and get placed!)**(Waitlist) 🔒
+
+### Phase 6 ▸ Wrap-Up & Feedback
+- **Recap:** Narrative ✓ Skill Map ✓ Apps ✓ Confidence Δ  
+- **Optional NPS** (≥ 8 unlocks referral coupon)  
+
+
+---
+
+## Locked Premium Modules
+- Mentor Feedback Call  
+- Full Training Track (MOOCs & Capstones)  
+- AI Chatbot
+
+---
+
+## Smart Nudges
+- 12 h & 24 h idle reminders  
+- 90 % completion encouragement  
+- Streak celebration & anonymous leaderboard tease
+
+---
+
+## Key Metrics
+- `event_sprint_complete`  
+- `event_skillmap_saved`  
+- `event_app_submitted_1` / `event_app_submitted_2`  
+- `event_confidence_check`  
+- `event_training_click` / `event_waitlist`
+
+---
+
+## UI Tone & Style
+- **Bold optimism** • **Warm mentorship**  
+- **Clean, minimal** UI in **translucent blues** (#4F6DFF)  
+- **Interactive** carousels, drag-and-drop skill cards, progress bars
+
+
+
+
