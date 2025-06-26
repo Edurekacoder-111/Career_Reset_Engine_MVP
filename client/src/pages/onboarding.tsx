@@ -50,19 +50,19 @@ export default function Onboarding() {
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Play className="w-8 h-8 text-green-600" />
           </div>
-          <h2 className="text-xl responsive-title font-bold text-gray-900 mb-2">From Lost to Landing Jobs</h2>
+          <h2 className="text-xl responsive-title font-bold text-gray-900 mb-2">From Career Confusion to Clear Direction</h2>
           <p className="text-gray-600 responsive-text">60-second explainer of your journey ahead</p>
         </div>
 
         {/* Video Placeholder */}
-        <div className="bg-gray-100 rounded-lg p-8 responsive-card text-center mb-8">
+        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-8 responsive-card text-center mb-8 border border-gray-200">
           <Play className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-          <p className="text-gray-600 responsive-text">Watch how we'll transform your career story into real job applications</p>
-          <button className="mt-4 px-6 py-2 responsive-button bg-purple-600 text-white rounded-lg">Play Video</button>
+          <p className="text-gray-700 responsive-text mb-6">Watch how we'll transform your career story into targeted job applications</p>
+          <button className="responsive-button bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-colors shadow-lg hover:shadow-xl">Play Video</button>
         </div>
 
         {/* Baseline Pulse */}
-        <div className="bg-gray-50 rounded-lg p-6">
+        <div className="bg-white border border-gray-200 rounded-xl p-6 lg:p-8 shadow-sm">
           <h3 className="font-semibold text-gray-900 mb-4">Let's establish your baseline</h3>
           
           <div className="space-y-4">

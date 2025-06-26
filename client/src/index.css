@@ -212,16 +212,23 @@ body {
 /* Responsive breakpoints for web screens */
 @media (min-width: 768px) {
   .responsive-container {
-    padding: 1.5rem 2rem;
-    max-width: 800px;
+    padding: 2rem 4rem;
+    max-width: 1200px;
     margin: 0 auto;
   }
 }
 
 @media (min-width: 1024px) {
   .responsive-container {
-    padding: 2rem 3rem;
-    max-width: 1000px;
+    padding: 3rem 6rem;
+    max-width: 1400px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .responsive-container {
+    padding: 4rem 8rem;
+    max-width: 1600px;
   }
 }
 
@@ -240,24 +247,51 @@ body {
 /* Typography scaling for web screens */
 @media (min-width: 768px) {
   .responsive-title {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
   }
   
   .responsive-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.375rem;
+    line-height: 1.4;
   }
   
   .responsive-text {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
+    line-height: 1.6;
   }
 }
 
 @media (min-width: 1024px) {
   .responsive-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
   }
   
   .responsive-subtitle {
+    font-size: 1.625rem;
+    line-height: 1.4;
+  }
+  
+  .responsive-text {
+    font-size: 1.375rem;
+    line-height: 1.6;
+  }
+}
+
+@media (min-width: 1440px) {
+  .responsive-title {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+  
+  .responsive-subtitle {
+    font-size: 1.875rem;
+  }
+  
+  .responsive-text {
     font-size: 1.5rem;
   }
 }
@@ -265,22 +299,45 @@ body {
 /* Button enhancements for web */
 @media (min-width: 768px) {
   .responsive-button {
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-    min-height: 52px;
+    padding: 1.25rem 2.5rem;
+    font-size: 1.25rem;
+    min-height: 56px;
+    border-radius: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-button {
+    padding: 1.5rem 3rem;
+    font-size: 1.375rem;
+    min-height: 64px;
+    border-radius: 16px;
   }
 }
 
 /* Form enhancements for web */
 @media (min-width: 768px) {
   .responsive-form {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
   }
   
   .responsive-input {
-    padding: 1rem 1.25rem;
-    font-size: 1rem;
+    padding: 1.25rem 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-form {
+    max-width: 700px;
+  }
+  
+  .responsive-input {
+    padding: 1.5rem 2rem;
+    font-size: 1.25rem;
+    border-radius: 16px;
   }
 }
 

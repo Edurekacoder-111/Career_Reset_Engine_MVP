@@ -55,30 +55,30 @@ export default function Landing() {
       />
 
       <div className="p-6 responsive-container text-center">
-        <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <HelpCircle className="w-8 h-8 text-purple-600" />
+        <div className="w-24 h-24 lg:w-32 lg:h-32 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 lg:mb-8">
+          <HelpCircle className="w-8 h-8 lg:w-12 lg:h-12 text-purple-600" />
         </div>
-        <h1 className="text-2xl responsive-title font-bold text-gray-900 mb-4">Feeling Stuck in Your Career?</h1>
-        <p className="text-gray-600 responsive-text mb-8">Take our 90-second diagnostic to discover your path forward</p>
+        <h1 className="text-2xl responsive-title font-bold text-gray-900 mb-6">Ready to Reset Your Career?</h1>
+        <p className="text-gray-600 responsive-text mb-12 leading-relaxed max-w-2xl mx-auto">Take our 90-second diagnostic to discover your path forward</p>
         
-        <div className="space-y-4 text-left">
+        <div className="space-y-6 lg:space-y-8 text-left max-w-3xl mx-auto">
           <ConfidenceSlider
             value={confidence}
             onChange={setConfidence}
             label="How confident are you about your career direction?"
           />
 
-          <div className="p-4 border border-gray-200 rounded-lg">
-            <p className="font-medium mb-3">How long have you been preparing for a career change?</p>
-            <div className="grid grid-cols-2 responsive-grid-2 gap-2">
+          <div className="p-6 lg:p-8 border border-gray-200 rounded-xl bg-white shadow-sm">
+            <p className="font-semibold responsive-subtitle mb-4 lg:mb-6 text-gray-900">How long have you been preparing for a career change?</p>
+            <div className="grid grid-cols-2 responsive-grid-2 gap-3 lg:gap-4">
               {timeframeOptions.map((option) => (
                 <button
                   key={option}
                   onClick={() => setTimeframe(option)}
-                  className={`p-3 border rounded-lg text-sm transition-colors ${
+                  className={`p-4 lg:p-5 border rounded-xl text-sm lg:text-base font-medium transition-all duration-200 ${
                     timeframe === option
-                      ? "border-purple-600 bg-purple-50 text-purple-600"
-                      : "border-gray-200 hover:border-purple-600"
+                      ? "border-purple-600 bg-purple-50 text-purple-600 shadow-md"
+                      : "border-gray-300 hover:border-purple-400 hover:bg-gray-50"
                   }`}
                 >
                   {option}
@@ -88,7 +88,7 @@ export default function Landing() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-8 responsive-form">
+        <form onSubmit={handleSubmit} className="mt-12 lg:mt-16 responsive-form">
           <input
             type="email"
             placeholder="Enter your email"
