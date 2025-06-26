@@ -101,24 +101,26 @@ export default function JourneyComplete() {
             </div>
             <p className="text-sm text-gray-600 mb-4">Your feedback helps us improve</p>
             
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-sm text-gray-500">Not likely</span>
-              <div className="flex space-x-2">
+            <div className="mb-4">
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-xs text-gray-500">Not likely</span>
+                <span className="text-xs text-gray-500">Extremely likely</span>
+              </div>
+              <div className="grid grid-cols-11 gap-1">
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((score) => (
                   <button
                     key={score}
                     onClick={() => setNpsScore(score)}
-                    className={`w-8 h-8 border rounded text-sm transition-colors ${
+                    className={`aspect-square text-xs font-medium border rounded transition-colors ${
                       npsScore === score
                         ? "bg-green-500 text-white border-green-500"
-                        : "border-gray-300 hover:bg-gray-100"
+                        : "border-gray-300 hover:bg-gray-100 text-gray-700"
                     }`}
                   >
                     {score}
                   </button>
                 ))}
               </div>
-              <span className="text-sm text-gray-500">Extremely likely</span>
             </div>
             
             <div className="text-center text-sm text-green-600 font-medium">
