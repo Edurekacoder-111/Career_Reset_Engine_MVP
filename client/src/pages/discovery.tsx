@@ -386,27 +386,27 @@ export default function Discovery() {
         </div>
 
         {/* Skill-Gap Badges */}
-        <div className="mb-6">
-          <h3 className="font-semibold text-gray-900 mb-4">Skill-Gap Badges</h3>
-          <div className="space-y-3">
+        <div className="mb-8">
+          <h3 className="font-semibold text-gray-900 mb-6 text-lg">Skill-Gap Badges</h3>
+          <div className="space-y-4">
             {skillGaps.map((gap) => (
               <div
                 key={gap.name}
-                className={`flex items-center justify-between p-3 rounded-lg border ${
+                className={`flex items-center justify-between p-4 md:p-5 rounded-xl border-2 transition-all hover:shadow-md ${
                   gap.color === "red" ? "bg-red-50 border-red-200" :
                   gap.color === "yellow" ? "bg-yellow-50 border-yellow-200" :
                   "bg-green-50 border-green-200"
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <div className={`w-2 h-2 rounded-full ${
+                <div className="flex items-center space-x-4">
+                  <div className={`w-3 h-3 md:w-4 md:h-4 rounded-full ${
                     gap.color === "red" ? "bg-red-500" :
                     gap.color === "yellow" ? "bg-yellow-500" :
                     "bg-green-500"
                   }`} />
-                  <span className="font-medium text-gray-900">{gap.name}</span>
+                  <span className="font-semibold text-gray-900 text-base md:text-lg">{gap.name}</span>
                 </div>
-                <span className={`font-semibold ${
+                <span className={`font-bold text-xl md:text-2xl ${
                   gap.color === "red" ? "text-red-600" :
                   gap.color === "yellow" ? "text-yellow-600" :
                   "text-green-600"
@@ -419,29 +419,29 @@ export default function Discovery() {
         </div>
 
         {/* Story Clarity Score */}
-        <div className="text-center mb-6">
-          <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl font-bold text-white">72</span>
+        <div className="text-center mb-8 bg-white border border-gray-200 rounded-xl p-6 md:p-8 shadow-sm">
+          <div className="w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">72</span>
           </div>
-          <h3 className="font-semibold text-gray-900">Story Clarity Score</h3>
-          <p className="text-sm text-gray-600 mb-4">Good progress! Let's get to 85+</p>
+          <h3 className="font-bold text-gray-900 text-xl md:text-2xl mb-3">Story Clarity Score</h3>
+          <p className="text-base md:text-lg text-gray-600 mb-6">Good progress! Let's get to 85+</p>
           
-          <div className="text-left bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center space-x-2 text-sm">
-              <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs">✓</span>
+          <div className="text-left bg-gray-50 rounded-xl p-5 md:p-6 space-y-3">
+            <div className="flex items-center space-x-3 text-base md:text-lg">
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white text-sm md:text-base">✓</span>
               </div>
-              <span className="text-gray-700">Background captured</span>
+              <span className="text-gray-700 font-medium">Background captured</span>
             </div>
-            <div className="flex items-center space-x-2 text-sm mt-1">
-              <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs">✓</span>
+            <div className="flex items-center space-x-3 text-base md:text-lg">
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white text-sm md:text-base">✓</span>
               </div>
-              <span className="text-gray-700">Achievements selected</span>
+              <span className="text-gray-700 font-medium">Achievements selected</span>
             </div>
-            <div className="flex items-center space-x-2 text-sm mt-1">
-              <Clock className="w-4 h-4 text-orange-500" />
-              <span className="text-gray-700">Core skills pending</span>
+            <div className="flex items-center space-x-3 text-base md:text-lg">
+              <Clock className="w-5 h-5 md:w-6 md:h-6 text-orange-500 flex-shrink-0" />
+              <span className="text-gray-700 font-medium">Core skills pending</span>
             </div>
           </div>
         </div>
