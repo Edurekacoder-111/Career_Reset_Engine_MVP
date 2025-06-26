@@ -47,9 +47,6 @@ export default function Onboarding() {
 
       <div className="p-6 responsive-container">
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Play className="w-8 h-8 text-green-600" />
-          </div>
           <h2 className="text-xl responsive-title font-bold text-gray-900 mb-2">From Career Confusion to Clear Direction</h2>
           <p className="text-gray-600 responsive-text">60-second explainer of your journey ahead</p>
         </div>
