@@ -42,7 +42,9 @@ export default function Header({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 md:space-x-3">
               <div className="w-8 h-8 md:w-10 md:h-10 bg-white rounded-lg flex items-center justify-center">
-                <Rocket className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
+                <div className="flex items-center justify-center w-full h-full">
+                  <Rocket className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
+                </div>
               </div>
               <span className="font-semibold text-lg md:text-xl">CareerReset</span>
             </div>
