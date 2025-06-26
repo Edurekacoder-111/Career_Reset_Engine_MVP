@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { BarChart3, Columns, Heart, Flame, Clock, GraduationCap } from "lucide-react";
+import { BarChart3, Columns, Heart, Flame, Clock, GraduationCap, Lock } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { useUserProgress } from "@/hooks/use-user-progress";
 import Header from "@/components/header";
 import WaitlistModal from "@/components/waitlist-modal";
+import PremiumModal from "@/components/premium-modal";
 
 export default function ProgressDashboard() {
   const [, setLocation] = useLocation();
   const [showTrainingModal, setShowTrainingModal] = useState(false);
+  const [showPremiumModal, setShowPremiumModal] = useState(true);
+  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
   
   const userId = localStorage.getItem("userId");
   const { progress, updateProgress, isUpdating } = useUserProgress(userId ? parseInt(userId) : null);
@@ -42,6 +45,15 @@ export default function ProgressDashboard() {
     setLocation("/complete");
   };
 
+  const handleJoinWaitlist = () => {
+    setShowPremiumModal(false);
+    setShowWaitlistModal(true);
+  };
+
+  const handleClosePremium = () => {
+    setShowPremiumModal(false);
+  };
+
   // Organize applications by status for Kanban
   const sentApps = applications.filter(app => app.status === "sent");
   const viewedApps = applications.filter(app => app.status === "viewed");
@@ -67,13 +79,34 @@ export default function ProgressDashboard() {
         gradientClass="gradient-purple"
       />
 
-      <div className="p-4 responsive-container">
-        {/* Application Pipeline (Kanban) */}
-        <div className="mb-6">
-          <div className="flex items-center space-x-2 mb-4">
-            <Columns className="w-5 h-5 text-purple-600" />
-            <h2 className="font-bold responsive-title text-gray-900">Application Pipeline</h2>
+      <div className="p-4 responsive-container relative">
+        {/* Premium Lock Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-white/95 backdrop-blur-sm z-30 flex items-center justify-center">
+          <div className="text-center p-6 md:p-8 max-w-md mx-auto">
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Lock className="w-8 h-8 md:w-10 md:h-10 text-white" />
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Premium Dashboard</h3>
+            <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
+              Unlock advanced progress tracking and application insights to accelerate your career journey.
+            </p>
+            <button 
+              onClick={() => setShowPremiumModal(true)}
+              className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-lg hover:shadow-xl text-sm md:text-base"
+            >
+              Unlock Premium
+            </button>
           </div>
+        </div>
+
+        {/* Blurred Background Content */}
+        <div className="filter blur-sm pointer-events-none opacity-60">
+          {/* Application Pipeline (Kanban) */}
+          <div className="mb-6">
+            <div className="flex items-center space-x-2 mb-4">
+              <Columns className="w-5 h-5 text-purple-600" />
+              <h2 className="font-bold responsive-title text-gray-900">Application Pipeline</h2>
+            </div>
           
           <div className="grid grid-cols-1 responsive-grid-3 gap-3">
             {/* Sent Column */}
@@ -238,34 +271,54 @@ export default function ProgressDashboard() {
           </div>
         </div>
 
-        {/* Training Track Panel */}
-        <div className="bg-gray-50 rounded-lg p-4 mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <div className="flex items-center space-x-2">
-                <GraduationCap className="w-4 h-4 text-orange-500" />
-                <span className="font-semibold text-gray-900">Training Track Panel</span>
-                <span className="text-gray-400 text-sm">🔒</span>
+          {/* Training Track Panel */}
+          <div className="bg-gray-50 rounded-lg p-4 mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <GraduationCap className="w-4 h-4 text-orange-500" />
+                  <span className="font-semibold text-gray-900">Training Track Panel</span>
+                  <span className="text-gray-400 text-sm">🔒</span>
+                </div>
+                <p className="text-sm text-gray-600">Improve your skills and get placed!</p>
               </div>
-              <p className="text-sm text-gray-600">Improve your skills and get placed!</p>
             </div>
+            <button
+              onClick={() => setShowTrainingModal(true)}
+              className="w-full border border-orange-500 text-orange-500 py-2 rounded font-medium text-sm"
+            >
+              Waitlist
+            </button>
           </div>
+
           <button
-            onClick={() => setShowTrainingModal(true)}
-            className="w-full border border-orange-500 text-orange-500 py-2 rounded font-medium text-sm"
+            onClick={handleContinueJourney}
+            disabled={isUpdating}
+            className="w-full btn-green py-3"
           >
-            Waitlist
+            {isUpdating ? "Saving..." : "Continue Your Journey →"}
           </button>
         </div>
-
-        <button
-          onClick={handleContinueJourney}
-          disabled={isUpdating}
-          className="w-full btn-green py-3"
-        >
-          {isUpdating ? "Saving..." : "Continue Your Journey →"}
-        </button>
       </div>
+
+      <PremiumModal
+        isOpen={showPremiumModal}
+        onClose={handleClosePremium}
+        onJoinWaitlist={handleJoinWaitlist}
+        title="Progress Dashboard Premium"
+        description="Get advanced analytics, AI insights, and career coaching to fast-track your success."
+        benefits={[
+          "Real-time application tracking with employer insights",
+          "AI-powered career recommendations and next steps",
+          "Weekly 1-on-1 coaching sessions with career experts"
+        ]}
+      />
+
+      <WaitlistModal
+        isOpen={showWaitlistModal}
+        onClose={() => setShowWaitlistModal(false)}
+        type="mentor"
+      />
 
       <WaitlistModal
         isOpen={showTrainingModal}
