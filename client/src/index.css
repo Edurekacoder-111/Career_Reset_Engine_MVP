@@ -201,6 +201,110 @@ body {
   font-weight: 700;
 }
 
+/* Responsive Design Enhancement - Web & Mobile Compatible */
+
+/* Base container that works for both web and mobile */
+.responsive-container {
+  width: 100%;
+  padding: 1rem;
+}
+
+/* Responsive breakpoints for web screens */
+@media (min-width: 768px) {
+  .responsive-container {
+    padding: 1.5rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    padding: 2rem 3rem;
+    max-width: 1000px;
+  }
+}
+
+/* Enhanced navigation for larger screens */
+@media (min-width: 768px) {
+  .nav-menu-overlay {
+    width: 400px;
+  }
+  
+  .nav-menu-item {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+  }
+}
+
+/* Typography scaling for web screens */
+@media (min-width: 768px) {
+  .responsive-title {
+    font-size: 2.5rem;
+  }
+  
+  .responsive-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .responsive-text {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-title {
+    font-size: 3rem;
+  }
+  
+  .responsive-subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* Button enhancements for web */
+@media (min-width: 768px) {
+  .responsive-button {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    min-height: 52px;
+  }
+}
+
+/* Form enhancements for web */
+@media (min-width: 768px) {
+  .responsive-form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .responsive-input {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+/* Grid layouts for web */
+@media (min-width: 768px) {
+  .responsive-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .responsive-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Card spacing for web */
+@media (min-width: 768px) {
+  .responsive-card {
+    padding: 2rem;
+    border-radius: 16px;
+  }
+}
+
 /* Card responsive styles */
 .card-responsive {
   padding: 16px;

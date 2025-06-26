@@ -70,61 +70,54 @@ export default function Header({
 
       {/* Navigation Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setIsMenuOpen(false)}>
-          <div 
-            className="absolute top-0 right-0 w-80 sm:w-96 max-w-full h-full bg-white shadow-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-4 md:p-6 border-b border-gray-200">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+          <div className="absolute top-0 right-0 w-80 nav-menu-overlay max-w-full h-full bg-white shadow-xl">
+            <div className="p-4 border-b border-gray-200">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2 md:space-x-3">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-purple-600 rounded-lg flex items-center justify-center">
-                    <Rocket className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
+                    <Rocket className="w-5 h-5 text-white" />
                   </div>
-                  <span className="font-semibold text-gray-900 text-lg md:text-xl">CareerReset</span>
+                  <span className="font-semibold text-gray-900">CareerReset</span>
                 </div>
                 <button 
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 md:p-3 hover:bg-gray-100 rounded-lg transition-colors mobile-nav-button"
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
-                  <X className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
+                  <X className="w-5 h-5 text-gray-600" />
                 </button>
               </div>
             </div>
             
-            <div className="p-4 md:p-6 overflow-y-auto h-full pb-20">
-              <h3 className="font-semibold text-gray-900 mb-4 text-lg md:text-xl">Navigation</h3>
-              <div className="space-y-3">
+            <div className="p-4">
+              <h3 className="font-semibold text-gray-900 mb-4">Navigation</h3>
+              <div className="space-y-2">
                 {menuItems.map((item) => (
                   <button
                     key={item.path}
                     onClick={() => handleNavigation(item.path)}
-                    className={`w-full flex items-center space-x-3 p-4 md:p-5 rounded-xl text-left transition-all duration-200 btn-mobile-friendly ${
+                    className={`w-full flex items-center space-x-3 p-3 nav-menu-item rounded-lg text-left transition-colors ${
                       location === item.path
-                        ? "bg-purple-100 text-purple-700 border-2 border-purple-200 shadow-md"
-                        : "hover:bg-gray-50 text-gray-700 border-2 border-transparent hover:border-gray-200"
+                        ? "bg-purple-100 text-purple-700 border border-purple-200"
+                        : "hover:bg-gray-100 text-gray-700"
                     }`}
                   >
-                    <div className="flex-shrink-0">
-                      {item.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-sm md:text-base truncate">{item.label}</div>
-                      <div className="text-xs md:text-sm text-gray-500 mt-1">{item.phase}</div>
+                    {item.icon}
+                    <div>
+                      <div className="font-medium">{item.label}</div>
+                      <div className="text-sm text-gray-500">{item.phase}</div>
                     </div>
                   </button>
                 ))}
               </div>
               
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <div className="bg-purple-50 rounded-xl p-4 md:p-5">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <HelpCircle className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
-                    <span className="font-semibold text-purple-900 text-sm md:text-base">Journey Progress</span>
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <div className="bg-purple-50 rounded-lg p-3">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <HelpCircle className="w-4 h-4 text-purple-600" />
+                    <span className="font-medium text-purple-900">Journey Progress</span>
                   </div>
-                  <p className="text-sm md:text-base text-purple-700 leading-relaxed">
-                    Navigate through your 6-phase career transformation journey
-                  </p>
+                  <p className="text-sm text-purple-700">Navigate through your 6-phase career transformation journey</p>
                 </div>
               </div>
             </div>
