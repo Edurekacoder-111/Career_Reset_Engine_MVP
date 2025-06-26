@@ -54,8 +54,8 @@ export default function Header({
             </button>
           </div>
           <div className="mt-4 md:mt-6">
-            <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center mb-3 md:mb-4 text-justify">
-              <span className="text-2xl md:text-3xl">{icon || "🚀"}</span>
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center mb-3 md:mb-4">
+              <span className="text-2xl md:text-3xl flex items-center justify-center">{icon || "🚀"}</span>
             </div>
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2">{title}</h1>
             <p className="text-white/90 text-sm md:text-base lg:text-lg">{subtitle}</p>
