@@ -48,7 +48,7 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-white">
       <Header
-        title="Feeling Stuck in Your Career?"
+        title="Ready to Reset Your Career?"
         subtitle=""
         icon={<HelpCircle className="w-6 h-6 text-white" />}
         gradientClass="gradient-purple"
