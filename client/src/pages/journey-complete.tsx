@@ -63,7 +63,7 @@ export default function JourneyComplete() {
       <Header
         title="Journey Complete!"
         subtitle="Congratulations on completing your career reset"
-        icon={<Trophy className="w-6 h-6 text-white" />}
+        icon="🏆"
         phase="Phase 6 - Wrap-Up"
         gradientClass="gradient-green"
       />

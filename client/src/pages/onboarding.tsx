@@ -41,7 +41,7 @@ export default function Onboarding() {
       <Header
         title="From Lost to Landing Jobs"
         subtitle="60-second explainer of your journey ahead"
-        icon={<Play className="w-6 h-6 text-white" />}
+        icon="▶️"
         gradientClass="gradient-purple"
       />
 

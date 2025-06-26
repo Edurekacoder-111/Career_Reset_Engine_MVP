@@ -78,7 +78,7 @@ export default function RoleMatching() {
       <Header
         title="Role Matching"
         subtitle="AI-powered job recommendations"
-        icon={<Search className="w-6 h-6 text-white" />}
+        icon="🎯"
         gradientClass="gradient-blue-purple"
       />
 

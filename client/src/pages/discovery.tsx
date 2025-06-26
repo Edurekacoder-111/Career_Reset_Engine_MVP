@@ -143,7 +143,7 @@ export default function Discovery() {
       <Header
         title="Discovery Sprint"
         subtitle="Let's build your career story"
-        icon={<Search className="w-6 h-6 text-white" />}
+        icon="🔍"
         phase="Day 1 Unlocked"
         gradientClass="gradient-green"
       />

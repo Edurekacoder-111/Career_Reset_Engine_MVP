@@ -88,7 +88,7 @@ export default function ApplicationBuilder() {
       <Header
         title="Application Builder"
         subtitle="Ready to apply for your dream roles"
-        icon={<FileText className="w-6 h-6 text-white" />}
+        icon="📄"
         phase="Phase 4 Active"
         gradientClass="gradient-green"
       />

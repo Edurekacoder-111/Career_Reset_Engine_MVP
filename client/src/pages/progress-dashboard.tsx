@@ -62,7 +62,7 @@ export default function ProgressDashboard() {
       <Header
         title="Progress Dashboard"
         subtitle="Track your application journey"
-        icon={<BarChart3 className="w-6 h-6 text-white" />}
+        icon="📊"
         phase="Phase 5 Active"
         gradientClass="gradient-purple"
       />

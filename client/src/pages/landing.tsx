@@ -50,7 +50,7 @@ export default function Landing() {
       <Header
         title="Ready to Reset Your Career?"
         subtitle=""
-        icon={<HelpCircle className="w-6 h-6 text-white" />}
+        icon="🚀"
         gradientClass="gradient-purple"
       />
 
