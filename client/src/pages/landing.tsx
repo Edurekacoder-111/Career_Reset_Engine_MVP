@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, X } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
@@ -13,6 +13,7 @@ export default function Landing() {
   const [whatsapp, setWhatsapp] = useState("");
   const [confidence, setConfidence] = useState(30);
   const [timeframe, setTimeframe] = useState("1-6 months");
+  const [showEmailModal, setShowEmailModal] = useState(false);
   const { toast } = useToast();
 
   const createUserMutation = useMutation({
@@ -45,6 +46,14 @@ export default function Landing() {
     "Over a year"
   ];
 
+  const handleTimeframeClick = (option: string) => {
+    if (!email.trim()) {
+      setShowEmailModal(true);
+      return;
+    }
+    setTimeframe(option);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Header
@@ -74,7 +83,7 @@ export default function Landing() {
               {timeframeOptions.map((option) => (
                 <button
                   key={option}
-                  onClick={() => setTimeframe(option)}
+                  onClick={() => handleTimeframeClick(option)}
                   className={`p-3 border rounded-lg text-sm transition-colors ${
                     timeframe === option
                       ? "border-purple-600 bg-purple-50 text-purple-600"
@@ -113,6 +122,37 @@ export default function Landing() {
           </button>
         </form>
       </div>
+
+      {/* Email Validation Modal */}
+      {showEmailModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4 relative">
+            <button
+              onClick={() => setShowEmailModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              <X size={20} />
+            </button>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">📧</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Enter email to start your new career journey
+              </h3>
+              <p className="text-gray-600 text-sm mb-4">
+                Please enter your email address to continue with your career reset journey.
+              </p>
+              <button
+                onClick={() => setShowEmailModal(false)}
+                className="w-full btn-purple py-3"
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
