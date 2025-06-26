@@ -79,7 +79,7 @@ export default function ProgressDashboard() {
         gradientClass="gradient-purple"
       />
 
-      <div className="p-4 responsive-container relative">
+      <div className="page-container relative">
         {/* Premium Lock Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-white/95 backdrop-blur-sm z-30 flex items-center justify-center">
           <div className="text-center p-6 md:p-8 max-w-md mx-auto">

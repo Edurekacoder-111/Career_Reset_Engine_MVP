@@ -126,17 +126,59 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobile app container */
-.mobile-container {
-  max-width: 390px;
-  margin: 0 auto;
+/* Responsive app container */
+.responsive-container {
+  width: 100%;
   min-height: 100vh;
   background: white;
   position: relative;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile-only styling */
+@media (max-width: 767px) {
+  .responsive-container {
+    max-width: 390px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
 }
 
 /* Comprehensive responsive design */
+
+/* Page container - responsive across all screen sizes */
+.page-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+@media (min-width: 576px) {
+  .page-container {
+    padding: 20px;
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    padding: 24px;
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .page-container {
+    padding: 32px;
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-container {
+    padding: 40px;
+    max-width: 1140px;
+  }
+}
 
 /* Mobile-first approach - Base styles for mobile */
 .container {

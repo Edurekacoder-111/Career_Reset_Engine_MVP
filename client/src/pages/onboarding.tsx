@@ -45,7 +45,7 @@ export default function Onboarding() {
         gradientClass="gradient-purple"
       />
 
-      <div className="p-6 responsive-container">
+      <div className="page-container">
         <div className="text-center mb-8">
           <h2 className="text-xl responsive-title font-bold text-gray-900 mb-2">From Career Confusion to Clear Direction</h2>
           <p className="text-gray-600 responsive-text">60-second explainer of your journey ahead</p>

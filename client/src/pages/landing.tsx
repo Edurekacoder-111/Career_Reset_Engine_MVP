@@ -54,7 +54,7 @@ export default function Landing() {
         gradientClass="gradient-purple"
       />
 
-      <div className="p-6 text-center">
+      <div className="page-container text-center">
         <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <span className="text-4xl">🚀</span>
         </div>

@@ -31,7 +31,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="mobile-container">
+        <div className="responsive-container">
           <Toaster />
           <Router />
         </div>

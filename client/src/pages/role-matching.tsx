@@ -82,7 +82,7 @@ export default function RoleMatching() {
         gradientClass="gradient-blue-purple"
       />
 
-      <div className="p-4">
+      <div className="page-container">
         <div className="mb-6">
           <h2 className="font-bold text-gray-900 mb-4">Matched Roles for You</h2>
           

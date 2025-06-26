@@ -93,7 +93,7 @@ export default function ApplicationBuilder() {
         gradientClass="gradient-green"
       />
 
-      <div className="p-4 responsive-container">
+      <div className="page-container">
         {/* Selected Roles */}
         <div className="mb-6">
           <h2 className="font-bold responsive-title text-gray-900 mb-4">Your Selected Roles</h2>

@@ -148,7 +148,7 @@ export default function Discovery() {
         gradientClass="gradient-green"
       />
 
-      <div className="p-4">
+      <div className="page-container">
         {/* AI Questionnaire */}
         <div className="mb-6">
           <div className="flex items-center space-x-3 mb-4">
