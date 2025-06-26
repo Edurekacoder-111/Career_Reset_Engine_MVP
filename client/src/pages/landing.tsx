@@ -56,7 +56,7 @@ export default function Landing() {
 
       <div className="p-6 text-center">
         <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <HelpCircle className="w-8 h-8 text-purple-600" />
+          <span className="text-4xl">🚀</span>
         </div>
         <h1 className="text-2xl font-bold text-gray-900 mb-4">Ready to Reset Your Career?</h1>
         <p className="text-gray-600 mb-8">Take our 90-second diagnostic to discover your path forward</p>
