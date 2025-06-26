@@ -52,10 +52,15 @@ export default function Onboarding() {
         </div>
 
         {/* Video Placeholder */}
-        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-8 responsive-card text-center mb-8 border border-gray-200">
-          <Play className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-          <p className="text-gray-700 responsive-text mb-6">Watch how we'll transform your career story into targeted job applications</p>
-          <button className="responsive-button bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-colors shadow-lg hover:shadow-xl">Play Video</button>
+        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-12 text-center mb-12 border border-gray-200">
+          <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Play className="w-8 h-8 text-purple-600" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Journey Preview</h3>
+          <p className="text-gray-700 mb-8 max-w-md mx-auto leading-relaxed">Watch how we'll transform your career story into targeted job applications</p>
+          <button className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-colors shadow-lg hover:shadow-xl">
+            Play Video
+          </button>
         </div>
 
         {/* Baseline Pulse */}
