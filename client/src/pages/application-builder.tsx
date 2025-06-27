@@ -77,7 +77,7 @@ export default function ApplicationBuilder() {
       }
     });
     
-    setLocation("/dashboard");
+    setLocation("/roles");
   };
 
 
