@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { Rocket, Menu, X, Home, Play, Search, Target, FileText, BarChart3, Trophy, HelpCircle } from "lucide-react";
+import PremiumModal from "./premium-modal";
+import WaitlistModal from "./waitlist-modal";
 
 interface HeaderProps {
   title: string;
@@ -20,6 +22,8 @@ export default function Header({
   onShowEmailModal
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showProgressPremium, setShowProgressPremium] = useState(false);
+  const [showWaitlist, setShowWaitlist] = useState(false);
   const [location, setLocation] = useLocation();
 
   const menuItems = [
@@ -35,6 +39,13 @@ export default function Header({
   const protectedRoutes = ["/onboarding", "/discovery", "/roles", "/application"];
 
   const handleNavigation = (path: string) => {
+    // Check for Progress Dashboard (Premium feature)
+    if (path === "/dashboard") {
+      setShowProgressPremium(true);
+      setIsMenuOpen(false);
+      return;
+    }
+    
     // Check if user has email for protected routes
     const userEmail = localStorage.getItem("userEmail");
     
@@ -46,6 +57,11 @@ export default function Header({
     
     setLocation(path);
     setIsMenuOpen(false);
+  };
+
+  const handleJoinProgressWaitlist = () => {
+    setShowProgressPremium(false);
+    setShowWaitlist(true);
   };
 
 
@@ -174,6 +190,32 @@ export default function Header({
           </div>
         </div>
       )}
+      
+      {/* Progress Dashboard Premium Modal */}
+      <PremiumModal
+        isOpen={showProgressPremium}
+        onClose={() => setShowProgressPremium(false)}
+        onJoinWaitlist={handleJoinProgressWaitlist}
+        title="Progress Dashboard"
+        description="Track your career transformation journey with advanced analytics and personalized insights to accelerate your professional growth."
+        benefits={[
+          "Real-time progress tracking across all 6 phases",
+          "Personalized career insights and recommendations",
+          "Application success rate analytics and optimization tips",
+          "Confidence growth charts and milestone celebrations",
+          "Interview preparation scorecard and feedback",
+          "Salary negotiation tracker and market insights",
+          "Professional network growth analysis",
+          "Goal setting and achievement monitoring"
+        ]}
+      />
+      
+      {/* Waitlist Modal */}
+      <WaitlistModal
+        isOpen={showWaitlist}
+        onClose={() => setShowWaitlist(false)}
+        type="training"
+      />
     </>
   );
 }
