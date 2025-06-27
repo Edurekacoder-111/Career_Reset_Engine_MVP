@@ -55,33 +55,25 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50">
       <Header
         title="Ready to Reset Your Career?"
-        subtitle=""
+        subtitle="Take our 90-second diagnostic to discover your path forward"
         icon="🚀"
         gradientClass="gradient-purple"
         onShowEmailModal={() => setShowEmailModal(true)}
       />
 
       <div className="page-container">
-        <div className="header-content mb-8">
-          <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="text-4xl">🚀</span>
-          </div>
-          <h1 className="text-responsive-lg font-bold text-gray-900 mb-4">Ready to Reset Your Career?</h1>
-          <p className="text-gray-600 mb-8">Take our 90-second diagnostic to discover your path forward</p>
-        </div>
-        
-        <div className="content-section text-left">
+        <div className="content-section bg-white rounded-lg shadow-sm">
           <ConfidenceSlider
             value={confidence}
             onChange={setConfidence}
             label="How confident are you about your career direction?"
           />
 
-          <div className="component-card component-card-padding">
-            <p className="font-medium mb-4 text-responsive-base">How long have you been preparing for a career change?</p>
+          <div className="component-card component-card-padding bg-white">
+            <p className="font-medium mb-4 text-responsive-base text-gray-900">How long have you been preparing for a career change?</p>
             <div className="card-grid-2">
               {timeframeOptions.map((option) => (
                 <button
@@ -90,7 +82,7 @@ export default function Landing() {
                   className={`p-3 border rounded-lg text-sm transition-colors ${
                     timeframe === option
                       ? "border-purple-600 bg-purple-50 text-purple-600"
-                      : "border-gray-200 hover:border-purple-600"
+                      : "border-gray-200 hover:border-purple-600 text-gray-700 hover:text-gray-900"
                   }`}
                 >
                   {option}
@@ -98,32 +90,32 @@ export default function Landing() {
               ))}
             </div>
           </div>
-        </div>
 
-        <form onSubmit={handleSubmit} className="form-section">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="form-input"
-            required
-          />
-          <input
-            type="tel"
-            placeholder="WhatsApp number (optional)"
-            value={whatsapp}
-            onChange={(e) => setWhatsapp(e.target.value)}
-            className="form-input"
-          />
-          <button
-            type="submit"
-            disabled={createUserMutation.isPending}
-            className="w-full btn-purple py-4"
-          >
-            {createUserMutation.isPending ? "Creating Account..." : "Start My Career Reset Journey"}
-          </button>
-        </form>
+          <form onSubmit={handleSubmit} className="form-section">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-input"
+              required
+            />
+            <input
+              type="tel"
+              placeholder="WhatsApp number (optional)"
+              value={whatsapp}
+              onChange={(e) => setWhatsapp(e.target.value)}
+              className="form-input"
+            />
+            <button
+              type="submit"
+              disabled={createUserMutation.isPending}
+              className="w-full btn-purple py-4"
+            >
+              {createUserMutation.isPending ? "Creating Account..." : "Start My Career Reset Journey"}
+            </button>
+          </form>
+        </div>
       </div>
 
       {/* Email Validation Modal */}

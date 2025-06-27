@@ -66,6 +66,24 @@ body {
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+  
+  /* Ensure all text elements have proper color */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-gray-900;
+  }
+  
+  p {
+    @apply text-gray-700;
+  }
+  
+  label {
+    @apply text-gray-700;
+  }
+  
+  /* Ensure white background for all main containers */
+  .min-h-screen {
+    @apply bg-white;
+  }
 }
 
 /* Custom gradient backgrounds */
@@ -87,11 +105,11 @@ body {
 
 /* Layout and Alignment Utilities */
 .page-container {
-  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8;
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 bg-white min-h-screen;
 }
 
 .content-section {
-  @apply space-y-6 sm:space-y-8;
+  @apply space-y-6 sm:space-y-8 bg-white text-gray-900;
 }
 
 .card-grid {
@@ -135,7 +153,6 @@ body {
 /* Professional Header Styling */
 .header-professional {
   @apply shadow-lg border-b border-white/10;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
 }
 
 .header-icon-container {
