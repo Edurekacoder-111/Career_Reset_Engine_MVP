@@ -303,19 +303,30 @@ export default function ApplicationBuilder() {
           </div>
         </div>
 
-        <button
-          onClick={handleStartApplication2}
-          disabled={isUpdating}
-          className={`w-full px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 ${
-            isUpdating
-              ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-              : "bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          }`}
-        >
-          <span className="flex items-center justify-center space-x-2">
-            {isUpdating ? "Saving..." : "Start Application #2 →"}
-          </span>
-        </button>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            onClick={handleStartApplication2}
+            disabled={isUpdating}
+            className={`flex-1 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-200 ${
+              isUpdating
+                ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                : "bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            }`}
+          >
+            <span className="flex items-center justify-center space-x-2">
+              {isUpdating ? "Saving..." : "Start Application #2 →"}
+            </span>
+          </button>
+          
+          <button
+            onClick={() => setLocation("/complete")}
+            className="flex-1 px-8 py-4 rounded-xl font-bold text-lg border-2 border-green-500 text-green-600 hover:bg-green-50 hover:border-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          >
+            <span className="flex items-center justify-center space-x-2">
+              Check your Journey ✨
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   );
