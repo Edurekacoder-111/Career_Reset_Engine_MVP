@@ -139,7 +139,7 @@ export default function Landing() {
                 <span className="text-2xl">📧</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Enter email to start your new career journey
+                Please enter your email to start your new career journey!
               </h3>
               <p className="text-gray-600 text-sm mb-4">
                 We are here for you let's do it together! 🤝
