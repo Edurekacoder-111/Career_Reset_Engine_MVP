@@ -61,6 +61,7 @@ export default function Landing() {
         subtitle=""
         icon="🚀"
         gradientClass="gradient-purple"
+        onShowEmailModal={() => setShowEmailModal(true)}
       />
 
       <div className="page-container text-center">

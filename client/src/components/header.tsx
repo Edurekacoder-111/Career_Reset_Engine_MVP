@@ -8,6 +8,7 @@ interface HeaderProps {
   icon?: React.ReactNode;
   phase?: string;
   gradientClass?: string;
+  onShowEmailModal?: () => void;
 }
 
 export default function Header({ 
@@ -15,7 +16,8 @@ export default function Header({
   subtitle, 
   icon, 
   phase, 
-  gradientClass = "gradient-purple" 
+  gradientClass = "gradient-purple",
+  onShowEmailModal
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [location, setLocation] = useLocation();
@@ -30,7 +32,18 @@ export default function Header({
     { path: "/complete", label: "Journey Complete", icon: <Trophy className="w-5 h-5" />, phase: "Phase 6" },
   ];
 
+  const protectedRoutes = ["/onboarding", "/discovery", "/roles", "/application"];
+
   const handleNavigation = (path: string) => {
+    // Check if user has email for protected routes
+    const userEmail = localStorage.getItem("userEmail");
+    
+    if (protectedRoutes.includes(path) && !userEmail && onShowEmailModal) {
+      onShowEmailModal();
+      setIsMenuOpen(false);
+      return;
+    }
+    
     setLocation(path);
     setIsMenuOpen(false);
   };
