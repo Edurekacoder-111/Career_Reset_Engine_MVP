@@ -73,7 +73,7 @@ export default function Header({
 
             {/* Desktop navigation */}
             <nav className="hidden lg:flex items-center space-x-6">
-              {menuItems.slice(0, 5).map((item) => (
+              {menuItems.slice(0, 6).map((item) => (
                 <button
                   key={item.path}
                   onClick={() => handleNavigation(item.path)}
