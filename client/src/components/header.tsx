@@ -63,16 +63,9 @@ export default function Header({
               </div>
               <span className="font-semibold text-lg md:text-xl">CareerReset</span>
             </div>
-            {/* Mobile hamburger menu */}
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 md:p-3 hover:bg-white/10 rounded-lg transition-colors lg:hidden"
-            >
-              {isMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
-            </button>
-
-            {/* Desktop navigation */}
-            <nav className="hidden lg:flex items-center space-x-6">
+            
+            {/* Desktop navigation - positioned in center */}
+            <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 flex-1 justify-center max-w-4xl mx-8">
               {menuItems.slice(0, 6).map((item) => (
                 <button
                   key={item.path}
@@ -88,6 +81,14 @@ export default function Header({
                 </button>
               ))}
             </nav>
+            
+            {/* Mobile hamburger menu */}
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 md:p-3 hover:bg-white/10 rounded-lg transition-colors lg:hidden"
+            >
+              {isMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
+            </button>
           </div>
           
           {/* Professional Left-Aligned Content */}
