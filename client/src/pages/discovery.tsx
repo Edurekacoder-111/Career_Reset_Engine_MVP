@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { Search, Bot, Wand2, Clock } from "lucide-react";
+import { Search, Bot, Wand2, Clock, MessageSquare, Zap } from "lucide-react";
 import { useUserProgress } from "@/hooks/use-user-progress";
 import Header from "@/components/header";
 import WaitlistModal from "@/components/waitlist-modal";
@@ -16,6 +16,12 @@ export default function Discovery() {
   const [coreSkills, setCoreSkills] = useState<string[]>([]);
   const [showNarrative, setShowNarrative] = useState(false);
   const [showTrainingModal, setShowTrainingModal] = useState(false);
+  const [aiQuestions, setAiQuestions] = useState<any[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [questionResponses, setQuestionResponses] = useState<Record<number, string>>({});
+  const [isGeneratingQuestions, setIsGeneratingQuestions] = useState(false);
+  const [showAiQuestionnaire, setShowAiQuestionnaire] = useState(false);
+  const [narrativeDraft, setNarrativeDraft] = useState("");
   
   const userId = localStorage.getItem("userId");
   const { updateProgress, isUpdating } = useUserProgress(userId ? parseInt(userId) : null);
@@ -100,8 +106,108 @@ export default function Discovery() {
     });
   };
 
+  // n8n AI Agent Integration
+  const generateAiQuestions = async () => {
+    setIsGeneratingQuestions(true);
+    try {
+      // Call n8n webhook for AI question generation
+      const response = await fetch('/api/ai/generate-questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          education,
+          workExperience,
+          currentPhase: 'discovery'
+        }),
+      });
+
+      const data = await response.json();
+      setAiQuestions(data.questions || getDefaultQuestions());
+      setShowAiQuestionnaire(true);
+    } catch (error) {
+      console.error('Error generating AI questions:', error);
+      setAiQuestions(getDefaultQuestions());
+      setShowAiQuestionnaire(true);
+    } finally {
+      setIsGeneratingQuestions(false);
+    }
+  };
+
+  const getDefaultQuestions = () => [
+    {
+      id: 1,
+      question: "What specific achievements are you most proud of in your career?",
+      type: "open",
+      followUp: "What skills did you develop through this achievement?"
+    },
+    {
+      id: 2,
+      question: "What type of work environments help you perform at your best?",
+      type: "open",
+      followUp: "How does this relate to your career goals?"
+    },
+    {
+      id: 3,
+      question: "What are the biggest challenges you've overcome professionally?",
+      type: "open",
+      followUp: "What did you learn from these experiences?"
+    }
+  ];
+
+  const handleQuestionResponse = (response: string) => {
+    setQuestionResponses(prev => ({
+      ...prev,
+      [currentQuestionIndex]: response
+    }));
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestionIndex < aiQuestions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+    } else {
+      generateAiNarrative();
+    }
+  };
+
+  const generateAiNarrative = async () => {
+    try {
+      const response = await fetch('/api/ai/generate-narrative', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          education,
+          workExperience,
+          questionResponses,
+          achievements,
+          coreSkills
+        }),
+      });
+
+      const data = await response.json();
+      setNarrativeDraft(data.narrative || generateDefaultNarrative());
+      setShowNarrative(true);
+    } catch (error) {
+      console.error('Error generating narrative:', error);
+      setNarrativeDraft(generateDefaultNarrative());
+      setShowNarrative(true);
+    }
+  };
+
+  const generateDefaultNarrative = () => {
+    return `A dedicated professional with ${workExperience ? 'proven experience in their field' : 'growing expertise'} and ${education ? 'solid educational foundation' : 'practical knowledge'}. Demonstrates strong commitment to professional growth and achievement. Ready to leverage their unique combination of skills and experiences in their next career opportunity.`;
+  };
+
   const generateNarrative = () => {
-    setShowNarrative(true);
+    if (education.trim() || workExperience.trim()) {
+      generateAiQuestions();
+    } else {
+      setShowNarrative(true);
+      setNarrativeDraft(generateDefaultNarrative());
+    }
   };
 
   const handleContinue = () => {
@@ -184,23 +290,108 @@ export default function Discovery() {
 
             <button
               onClick={generateNarrative}
+              disabled={isGeneratingQuestions}
               className="w-full btn-purple py-3 flex items-center justify-center space-x-2"
             >
-              <span>Generate Draft Narrative</span>
-              <Wand2 className="w-4 h-4" />
+              {isGeneratingQuestions ? (
+                <>
+                  <span>Generating AI Questions...</span>
+                  <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
+                </>
+              ) : (
+                <>
+                  <span>Start AI Questionnaire</span>
+                  <Zap className="w-4 h-4" />
+                </>
+              )}
             </button>
           </div>
         </div>
+
+        {/* AI Questionnaire Modal */}
+        {showAiQuestionnaire && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900">AI Career Discovery</h3>
+                    <p className="text-sm text-gray-600">Question {currentQuestionIndex + 1} of {aiQuestions.length}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowAiQuestionnaire(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  ×
+                </button>
+              </div>
+
+              {aiQuestions[currentQuestionIndex] && (
+                <div className="space-y-6">
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="flex items-start space-x-3">
+                      <Bot className="w-6 h-6 text-blue-600 mt-1" />
+                      <div>
+                        <p className="text-gray-800 font-medium mb-2">
+                          {aiQuestions[currentQuestionIndex].question}
+                        </p>
+                        {aiQuestions[currentQuestionIndex].followUp && (
+                          <p className="text-sm text-gray-600 italic">
+                            Follow-up: {aiQuestions[currentQuestionIndex].followUp}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <textarea
+                      placeholder="Share your thoughts here..."
+                      value={questionResponses[currentQuestionIndex] || ""}
+                      onChange={(e) => handleQuestionResponse(e.target.value)}
+                      className="w-full p-4 border border-gray-300 rounded-lg h-32 resize-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <div className="flex space-x-2">
+                      {aiQuestions.map((_, index) => (
+                        <div
+                          key={index}
+                          className={`w-3 h-3 rounded-full ${
+                            index <= currentQuestionIndex ? 'bg-purple-600' : 'bg-gray-200'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    
+                    <button
+                      onClick={nextQuestion}
+                      disabled={!questionResponses[currentQuestionIndex]?.trim()}
+                      className="btn-purple px-6 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {currentQuestionIndex === aiQuestions.length - 1 ? 'Generate Narrative' : 'Next Question'}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Draft Narrative */}
         {showNarrative && (
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <div className="flex justify-between items-center mb-3">
-              <h3 className="font-semibold text-gray-900">Draft Narrative v0</h3>
-              <span className="text-xs bg-orange-500 text-white px-2 py-1 rounded">AI Generated</span>
+              <h3 className="font-semibold text-gray-900">AI-Generated Career Narrative</h3>
+              <span className="text-xs bg-green-500 text-white px-2 py-1 rounded">n8n AI Powered</span>
             </div>
             <p className="text-gray-700 text-sm leading-relaxed mb-4">
-              "A marketing professional with 5+ years experience in digital campaigns and brand strategy. Proven track record in increasing engagement rates by 40% and managing cross-functional teams..."
+              {narrativeDraft || "A marketing professional with 5+ years experience in digital campaigns and brand strategy. Proven track record in increasing engagement rates by 40% and managing cross-functional teams..."}
             </p>
             <button className="w-full border border-purple-600 text-purple-600 py-2 rounded-lg font-medium flex items-center justify-center space-x-2">
               <span>Edit Your Story</span>
