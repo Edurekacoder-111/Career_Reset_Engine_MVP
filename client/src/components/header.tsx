@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { Rocket, Menu, X, Home, Play, Search, Target, FileText, BarChart3, Trophy, HelpCircle, Lock, Zap, Crown } from "lucide-react";
-import PremiumModal from "./premium-modal";
-import WaitlistModal from "./waitlist-modal";
+import { Rocket, Menu, X, Home, Play, Search, Target, FileText, BarChart3, Trophy, HelpCircle } from "lucide-react";
 
 interface HeaderProps {
   title: string;
@@ -22,8 +20,6 @@ export default function Header({
   onShowEmailModal
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showPremiumModal, setShowPremiumModal] = useState(false);
-  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
   const [location, setLocation] = useLocation();
 
   const menuItems = [
@@ -32,7 +28,6 @@ export default function Header({
     { path: "/discovery", label: "Discovery Sprint", icon: <Search className="w-5 h-5" />, phase: "Phase 2" },
     { path: "/roles", label: "Role Matching", icon: <Target className="w-5 h-5" />, phase: "Phase 3" },
     { path: "/application", label: "Application Builder", icon: <FileText className="w-5 h-5" />, phase: "Phase 4" },
-    { path: "/ai-builder", label: "AI Application Builder", icon: <Zap className="w-5 h-5" />, phase: "Premium", isPremium: true },
     { path: "/dashboard", label: "Progress Dashboard", icon: <BarChart3 className="w-5 h-5" />, phase: "Phase 5" },
     { path: "/complete", label: "Journey Complete", icon: <Trophy className="w-5 h-5" />, phase: "Phase 6" },
   ];
@@ -40,13 +35,6 @@ export default function Header({
   const protectedRoutes = ["/onboarding", "/discovery", "/roles", "/application"];
 
   const handleNavigation = (path: string) => {
-    // Check for premium AI builder module
-    if (path === "/ai-builder") {
-      setShowPremiumModal(true);
-      setIsMenuOpen(false);
-      return;
-    }
-    
     // Check if user has email for protected routes
     const userEmail = localStorage.getItem("userEmail");
     
@@ -60,14 +48,7 @@ export default function Header({
     setIsMenuOpen(false);
   };
 
-  const handleJoinWaitlist = () => {
-    setShowPremiumModal(false);
-    setShowWaitlistModal(true);
-  };
 
-  const handleClosePremium = () => {
-    setShowPremiumModal(false);
-  };
 
   return (
     <>
@@ -164,21 +145,17 @@ export default function Header({
                       location === item.path
                         ? "bg-purple-100 text-purple-700 border border-purple-200"
                         : "hover:bg-gray-100 text-gray-700"
-                    } ${item.isPremium ? "bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200" : ""}`}
+                    }`}
                   >
                     <div className="flex items-center space-x-3">
                       {item.icon}
                       <div>
                         <div className="font-medium flex items-center space-x-2">
                           <span>{item.label}</span>
-                          {item.isPremium && <Crown className="w-4 h-4 text-yellow-500" />}
                         </div>
                         <div className="text-sm text-gray-500">{item.phase}</div>
                       </div>
                     </div>
-                    {item.isPremium && (
-                      <Lock className="w-4 h-4 text-purple-600" />
-                    )}
                   </button>
                 ))}
               </div>
@@ -196,25 +173,6 @@ export default function Header({
           </div>
         </div>
       )}
-
-      <PremiumModal
-        isOpen={showPremiumModal}
-        onClose={handleClosePremium}
-        onJoinWaitlist={handleJoinWaitlist}
-        title="AI Application Builder Premium"
-        description="Supercharge your applications with AI optimization and get 90%+ success rates."
-        benefits={[
-          "AI-powered resume optimization with keyword matching",
-          "Smart cover letters tailored to each company",
-          "Application success prediction and improvement tips"
-        ]}
-      />
-
-      <WaitlistModal
-        isOpen={showWaitlistModal}
-        onClose={() => setShowWaitlistModal(false)}
-        type="training"
-      />
     </>
   );
 }
