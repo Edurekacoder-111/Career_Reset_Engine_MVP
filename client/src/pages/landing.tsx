@@ -64,23 +64,25 @@ export default function Landing() {
         onShowEmailModal={() => setShowEmailModal(true)}
       />
 
-      <div className="page-container text-center">
-        <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <span className="text-4xl">🚀</span>
+      <div className="page-container">
+        <div className="header-content mb-8">
+          <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span className="text-4xl">🚀</span>
+          </div>
+          <h1 className="text-responsive-lg font-bold text-gray-900 mb-4">Ready to Reset Your Career?</h1>
+          <p className="text-gray-600 mb-8">Take our 90-second diagnostic to discover your path forward</p>
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Ready to Reset Your Career?</h1>
-        <p className="text-gray-600 mb-8">Take our 90-second diagnostic to discover your path forward</p>
         
-        <div className="space-y-4 text-left">
+        <div className="content-section text-left">
           <ConfidenceSlider
             value={confidence}
             onChange={setConfidence}
             label="How confident are you about your career direction?"
           />
 
-          <div className="p-4 border border-gray-200 rounded-lg">
-            <p className="font-medium mb-3">How long have you been preparing for a career change?</p>
-            <div className="grid grid-cols-2 gap-2">
+          <div className="component-card component-card-padding">
+            <p className="font-medium mb-4 text-responsive-base">How long have you been preparing for a career change?</p>
+            <div className="card-grid-2">
               {timeframeOptions.map((option) => (
                 <button
                   key={option}
@@ -98,13 +100,13 @@ export default function Landing() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-8">
+        <form onSubmit={handleSubmit} className="form-section">
           <input
             type="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+            className="form-input"
             required
           />
           <input
@@ -112,7 +114,7 @@ export default function Landing() {
             placeholder="WhatsApp number (optional)"
             value={whatsapp}
             onChange={(e) => setWhatsapp(e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-lg mb-4"
+            className="form-input"
           />
           <button
             type="submit"

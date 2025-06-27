@@ -85,6 +85,94 @@ body {
   background: linear-gradient(135deg, hsl(220, 70%, 50%), var(--brand-purple));
 }
 
+/* Layout and Alignment Utilities */
+.page-container {
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8;
+}
+
+.content-section {
+  @apply space-y-6 sm:space-y-8;
+}
+
+.card-grid {
+  @apply grid gap-4 sm:gap-6;
+}
+
+.card-grid-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6;
+}
+
+.card-grid-3 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+}
+
+.form-section {
+  @apply space-y-4 sm:space-y-6;
+}
+
+.button-group {
+  @apply flex flex-col sm:flex-row gap-3 sm:gap-4;
+}
+
+.text-section {
+  @apply space-y-3 sm:space-y-4;
+}
+
+/* Component Card Styling */
+.component-card {
+  @apply bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200;
+}
+
+.component-card-padding {
+  @apply p-4 sm:p-6;
+}
+
+/* Header Alignment */
+.header-content {
+  @apply text-center space-y-2 sm:space-y-3;
+}
+
+/* Button Utilities */
+.btn-purple {
+  @apply bg-purple-600 hover:bg-purple-700 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200;
+}
+
+.btn-outline {
+  @apply border border-purple-600 text-purple-600 hover:bg-purple-50 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200;
+}
+
+/* Form Input Styling */
+.form-input {
+  @apply w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200;
+}
+
+.form-textarea {
+  @apply w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors duration-200 resize-none;
+}
+
+/* Progress and Status Elements */
+.progress-indicator {
+  @apply flex items-center justify-center space-x-2;
+}
+
+.status-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+/* Responsive Text Sizing */
+.text-responsive-lg {
+  @apply text-lg sm:text-xl lg:text-2xl;
+}
+
+.text-responsive-base {
+  @apply text-sm sm:text-base;
+}
+
+/* Navigation and Header Fixes */
+.nav-item-spacing {
+  @apply space-x-2 sm:space-x-3;
+}
+
 /* Confidence slider styling */
 .confidence-slider {
   -webkit-appearance: none;

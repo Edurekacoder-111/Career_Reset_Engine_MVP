@@ -255,58 +255,59 @@ export default function Discovery() {
       />
 
       <div className="page-container">
-        {/* AI Questionnaire */}
-        <div className="mb-6">
-          <div className="flex items-center space-x-3 mb-4">
-            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-              <Bot className="w-5 h-5 text-purple-600" />
+        <div className="content-section">
+          {/* AI Questionnaire */}
+          <div className="component-card component-card-padding">
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                <Bot className="w-5 h-5 text-purple-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 text-responsive-lg">AI Questionnaire</h3>
+                <p className="text-sm text-gray-600">Pre-filling your background</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold text-gray-900">AI Questionnaire</h3>
-              <p className="text-sm text-gray-600">Pre-filling your background</p>
+
+            <div className="form-section">
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">What's your educational background?</label>
+                <textarea
+                  placeholder="Tell us about your education, certifications, or training..."
+                  value={education}
+                  onChange={(e) => setEducation(e.target.value)}
+                  className="form-textarea h-20"
+                />
+              </div>
+
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">What is your struggle and any past work experience?</label>
+                <textarea
+                  placeholder="Share your roles, responsibilities, and key projects..."
+                  value={workExperience}
+                  onChange={(e) => setWorkExperience(e.target.value)}
+                  className="form-textarea h-20"
+                />
+              </div>
+
+              <button
+                onClick={generateNarrative}
+                disabled={isGeneratingQuestions}
+                className="w-full btn-purple py-3 flex items-center justify-center space-x-2"
+              >
+                {isGeneratingQuestions ? (
+                  <>
+                    <span>Generating AI Questions...</span>
+                    <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
+                  </>
+                ) : (
+                  <>
+                    <span>Start AI Questionnaire</span>
+                    <Zap className="w-4 h-4" />
+                  </>
+                )}
+              </button>
             </div>
           </div>
-
-          <div className="space-y-4">
-            <div>
-              <label className="block font-medium text-gray-700 mb-2">What's your educational background?</label>
-              <textarea
-                placeholder="Tell us about your education, certifications, or training..."
-                value={education}
-                onChange={(e) => setEducation(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg h-20"
-              />
-            </div>
-
-            <div>
-              <label className="block font-medium text-gray-700 mb-2">What is your struggle and any past work experience?</label>
-              <textarea
-                placeholder="Share your roles, responsibilities, and key projects..."
-                value={workExperience}
-                onChange={(e) => setWorkExperience(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg h-20"
-              />
-            </div>
-
-            <button
-              onClick={generateNarrative}
-              disabled={isGeneratingQuestions}
-              className="w-full btn-purple py-3 flex items-center justify-center space-x-2"
-            >
-              {isGeneratingQuestions ? (
-                <>
-                  <span>Generating AI Questions...</span>
-                  <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
-                </>
-              ) : (
-                <>
-                  <span>Start AI Questionnaire</span>
-                  <Zap className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </div>
-        </div>
 
         {/* AI Questionnaire Modal */}
         {showAiQuestionnaire && (
@@ -657,13 +658,14 @@ export default function Discovery() {
           </div>
         </div>
 
-        <button
-          onClick={handleContinue}
-          disabled={isUpdating}
-          className="w-full btn-purple py-3"
-        >
-          {isUpdating ? "Saving..." : "Continue Discovery →"}
-        </button>
+          <button
+            onClick={handleContinue}
+            disabled={isUpdating}
+            className="w-full btn-purple py-3"
+          >
+            {isUpdating ? "Saving..." : "Continue Discovery →"}
+          </button>
+        </div>
       </div>
 
       <WaitlistModal

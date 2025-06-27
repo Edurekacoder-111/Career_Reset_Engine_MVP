@@ -46,25 +46,26 @@ export default function Onboarding() {
       />
 
       <div className="page-container">
-        <div className="text-center mb-8">
-          <h2 className="text-xl responsive-title font-bold text-gray-900 mb-2">From Career Confusion to Clear Direction</h2>
-          <p className="text-gray-600 responsive-text">60-second explainer of your journey ahead</p>
-        </div>
-
-        {/* Video Placeholder */}
-        <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-12 text-center mb-12 border border-gray-200">
-          <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Play className="w-8 h-8 text-purple-600" />
+        <div className="content-section">
+          <div className="header-content mb-8">
+            <h2 className="text-responsive-lg font-bold text-gray-900 mb-2">From Career Confusion to Clear Direction</h2>
+            <p className="text-gray-600 text-responsive-base">60-second explainer of your journey ahead</p>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Journey Preview</h3>
-          <p className="text-gray-700 mb-8 max-w-md mx-auto leading-relaxed">Watch how we'll transform your career story into targeted job applications</p>
-          <button className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-colors shadow-lg hover:shadow-xl">
-            Play Video
-          </button>
-        </div>
 
-        {/* Baseline Pulse */}
-        <div className="bg-white border border-gray-200 rounded-xl p-6 lg:p-8 shadow-sm">
+          {/* Video Placeholder */}
+          <div className="component-card bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl p-8 sm:p-12 text-center">
+            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Play className="w-8 h-8 text-purple-600" />
+            </div>
+            <h3 className="text-responsive-lg font-semibold text-gray-900 mb-4">Your Journey Preview</h3>
+            <p className="text-gray-700 mb-8 max-w-md mx-auto leading-relaxed text-responsive-base">Watch how we'll transform your career story into targeted job applications</p>
+            <button className="btn-purple px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl">
+              Play Video
+            </button>
+          </div>
+
+          {/* Baseline Pulse */}
+          <div className="component-card component-card-padding">
           <h3 className="font-semibold text-gray-900 mb-4">Let's establish your baseline</h3>
           
           <div className="space-y-4">
@@ -103,6 +104,7 @@ export default function Onboarding() {
           >
             {isUpdating ? "Saving..." : "Save Baseline & Continue"}
           </button>
+          </div>
         </div>
       </div>
     </div>
