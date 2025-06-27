@@ -279,7 +279,7 @@ export default function Discovery() {
             </div>
 
             <div>
-              <label className="block font-medium text-gray-700 mb-2">Describe your work experience</label>
+              <label className="block font-medium text-gray-700 mb-2">What is your struggle and any past work experience?</label>
               <textarea
                 placeholder="Share your roles, responsibilities, and key projects..."
                 value={workExperience}
