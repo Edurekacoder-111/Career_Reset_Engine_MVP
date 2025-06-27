@@ -11,7 +11,7 @@ import PremiumModal from "@/components/premium-modal";
 export default function ProgressDashboard() {
   const [, setLocation] = useLocation();
   const [showTrainingModal, setShowTrainingModal] = useState(false);
-  const [showPremiumModal, setShowPremiumModal] = useState(true);
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
   
   const userId = localStorage.getItem("userId");
