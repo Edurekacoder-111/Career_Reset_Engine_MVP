@@ -23,10 +23,6 @@ export default function JourneyComplete() {
     }
   }, [userId, setLocation]);
 
-  const handleBackToDashboard = () => {
-    setLocation("/dashboard");
-  };
-
   const handleRestartJourney = () => {
     setLocation("/");
   };
@@ -166,12 +162,7 @@ export default function JourneyComplete() {
           </button>
         </div>
 
-        <button
-          onClick={handleBackToDashboard}
-          className="w-full btn-green py-3"
-        >
-          Back to Dashboard
-        </button>
+
       </div>
     </div>
   );
