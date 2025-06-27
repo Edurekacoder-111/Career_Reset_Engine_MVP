@@ -141,7 +141,7 @@ export default function Landing() {
                 Enter email to start your new career journey
               </h3>
               <p className="text-gray-600 text-sm mb-4">
-                Please enter your email address to continue with your career reset journey.
+                We are here for you let's do it together! 🤝
               </p>
               <button
                 onClick={() => setShowEmailModal(false)}
