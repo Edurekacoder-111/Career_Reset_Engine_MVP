@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { FileText, Download, Edit, Send, Mail, Check, Flame, Lock, Crown, Zap } from "lucide-react";
+import { FileText, Download, Edit, Send, Mail, Check, Flame } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { useUserProgress } from "@/hooks/use-user-progress";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/header";
-import PremiumModal from "@/components/premium-modal";
-import WaitlistModal from "@/components/waitlist-modal";
 
 export default function ApplicationBuilder() {
   const [, setLocation] = useLocation();
   const [saveScreenshot, setSaveScreenshot] = useState(false);
-  const [showPremiumModal, setShowPremiumModal] = useState(false);
-  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
   const queryClient = useQueryClient();
   const { toast } = useToast();
   
@@ -84,14 +80,7 @@ export default function ApplicationBuilder() {
     setLocation("/dashboard");
   };
 
-  const handleJoinWaitlist = () => {
-    setShowPremiumModal(false);
-    setShowWaitlistModal(true);
-  };
 
-  const handleClosePremium = () => {
-    setShowPremiumModal(false);
-  };
 
   const remainingTime = "47h 23m";
   const streakProgress = hasApplications ? 50 : 0;
@@ -107,66 +96,6 @@ export default function ApplicationBuilder() {
       />
 
       <div className="page-container">
-        {/* Premium AI Application Builder Module */}
-        <div className="mb-6 relative">
-          <div className="component-card component-card-padding bg-gradient-to-r from-purple-50 to-purple-100 border-2 border-purple-200 relative overflow-hidden">
-            {/* Premium Lock Overlay */}
-            <div className="absolute inset-0 bg-white/90 backdrop-blur-sm flex items-center justify-center z-10">
-              <div className="text-center p-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Lock className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Premium AI Builder</h3>
-                <p className="text-gray-600 text-sm mb-3">Unlock AI-powered application optimization</p>
-                <button 
-                  onClick={() => setShowPremiumModal(true)}
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all text-sm"
-                >
-                  Unlock Premium
-                </button>
-              </div>
-            </div>
-            
-            {/* Background content (blurred) */}
-            <div className="opacity-30">
-              <div className="flex items-center space-x-2 mb-4">
-                <Zap className="w-5 h-5 text-purple-600" />
-                <h3 className="font-semibold text-gray-900">AI Application Optimizer</h3>
-                <Crown className="w-4 h-4 text-yellow-500" />
-              </div>
-              <p className="text-sm text-gray-600 mb-4">Automatically optimize your applications for 90%+ success rates using AI analysis</p>
-              
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-white rounded-lg border">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                      <Check className="w-4 h-4 text-green-600" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">AI Resume Optimizer</p>
-                      <p className="text-xs text-gray-500">Tailored keywords & format</p>
-                    </div>
-                  </div>
-                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Ready</span>
-                </div>
-                
-                <div className="flex items-center justify-between p-3 bg-white rounded-lg border">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <Mail className="w-4 h-4 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">Smart Cover Letters</p>
-                      <p className="text-xs text-gray-500">Company-specific messaging</p>
-                    </div>
-                  </div>
-                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">AI-Powered</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Selected Roles */}
         <div className="mb-6">
           <h2 className="font-bold responsive-title text-gray-900 mb-4">Your Selected Roles</h2>
@@ -388,25 +317,6 @@ export default function ApplicationBuilder() {
           </span>
         </button>
       </div>
-
-      <PremiumModal
-        isOpen={showPremiumModal}
-        onClose={handleClosePremium}
-        onJoinWaitlist={handleJoinWaitlist}
-        title="AI Application Builder Premium"
-        description="Supercharge your applications with AI optimization and get 90%+ success rates."
-        benefits={[
-          "AI-powered resume optimization with keyword matching",
-          "Smart cover letters tailored to each company",
-          "Application success prediction and improvement tips"
-        ]}
-      />
-
-      <WaitlistModal
-        isOpen={showWaitlistModal}
-        onClose={() => setShowWaitlistModal(false)}
-        type="training"
-      />
     </div>
   );
 }
