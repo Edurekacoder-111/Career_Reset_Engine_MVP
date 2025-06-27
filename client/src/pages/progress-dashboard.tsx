@@ -79,28 +79,7 @@ export default function ProgressDashboard() {
         gradientClass="gradient-purple"
       />
 
-      <div className="page-container relative">
-        {/* Premium Lock Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-white/95 backdrop-blur-sm z-30 flex items-center justify-center">
-          <div className="text-center p-6 md:p-8 max-w-md mx-auto">
-            <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Lock className="w-8 h-8 md:w-10 md:h-10 text-white" />
-            </div>
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Premium Dashboard</h3>
-            <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
-              Unlock advanced progress tracking and application insights to accelerate your career journey.
-            </p>
-            <button 
-              onClick={() => setShowPremiumModal(true)}
-              className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-lg hover:shadow-xl text-sm md:text-base"
-            >
-              Unlock Premium
-            </button>
-          </div>
-        </div>
-
-        {/* Blurred Background Content */}
-        <div className="filter blur-sm pointer-events-none opacity-60">
+      <div className="page-container">
           {/* Application Pipeline (Kanban) */}
           <div className="mb-6">
             <div className="flex items-center space-x-2 mb-4">
@@ -271,34 +250,33 @@ export default function ProgressDashboard() {
           </div>
         </div>
 
-          {/* Training Track Panel */}
-          <div className="bg-gray-50 rounded-lg p-4 mb-6">
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <div className="flex items-center space-x-2">
-                  <GraduationCap className="w-4 h-4 text-orange-500" />
-                  <span className="font-semibold text-gray-900">Training Track Panel</span>
-                  <span className="text-gray-400 text-sm">🔒</span>
-                </div>
-                <p className="text-sm text-gray-600">Improve your skills and get placed!</p>
+        {/* Training Track Panel */}
+        <div className="bg-gray-50 rounded-lg p-4 mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <div className="flex items-center space-x-2">
+                <GraduationCap className="w-4 h-4 text-orange-500" />
+                <span className="font-semibold text-gray-900">Training Track Panel</span>
+                <span className="text-gray-400 text-sm">🔒</span>
               </div>
+              <p className="text-sm text-gray-600">Improve your skills and get placed!</p>
             </div>
-            <button
-              onClick={() => setShowTrainingModal(true)}
-              className="w-full border border-orange-500 text-orange-500 py-2 rounded font-medium text-sm"
-            >
-              Waitlist
-            </button>
           </div>
-
           <button
-            onClick={handleContinueJourney}
-            disabled={isUpdating}
-            className="w-full btn-green py-3"
+            onClick={() => setShowTrainingModal(true)}
+            className="w-full border border-orange-500 text-orange-500 py-2 rounded font-medium text-sm"
           >
-            {isUpdating ? "Saving..." : "Continue Your Journey →"}
+            Waitlist
           </button>
         </div>
+
+        <button
+          onClick={handleContinueJourney}
+          disabled={isUpdating}
+          className="w-full btn-green py-3"
+        >
+          {isUpdating ? "Saving..." : "Continue Your Journey →"}
+        </button>
       </div>
 
       <PremiumModal
