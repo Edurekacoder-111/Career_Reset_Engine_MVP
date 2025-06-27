@@ -180,7 +180,7 @@ export default function RoleMatching() {
           disabled={isUpdating}
           className="w-full btn-green py-3"
         >
-          {isUpdating ? "Saving..." : "Complete Role Selection →"}
+          {isUpdating ? "Saving..." : "Build Application →"}
         </button>
       </div>
 
