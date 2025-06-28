@@ -15,12 +15,28 @@ export default function ConfidenceSlider({
 }: ConfidenceSliderProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showEncouragement, setShowEncouragement] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
+
+  // Get color based on confidence value (red to green)
+  const getSliderColor = (confidence: number) => {
+    if (confidence <= 25) return 'from-red-500 to-red-600';
+    if (confidence <= 50) return 'from-orange-500 to-orange-600';
+    if (confidence <= 75) return 'from-yellow-500 to-yellow-600';
+    return 'from-green-500 to-green-600';
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value);
     setIsTransitioning(true);
     onChange(newValue);
+    
+    // Show encouragement popup for low confidence
+    if (newValue <= 30 && !showEncouragement) {
+      setShowEncouragement(true);
+      setTimeout(() => setShowEncouragement(false), 3000);
+    }
+    
     setTimeout(() => setIsTransitioning(false), 100);
   };
 
@@ -28,9 +44,16 @@ export default function ConfidenceSlider({
     if (sliderRef.current) {
       const rect = sliderRef.current.getBoundingClientRect();
       const percentage = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
-      onChange(Math.round(percentage));
+      const newValue = Math.round(percentage);
+      onChange(newValue);
+      
+      // Show encouragement popup for low confidence
+      if (newValue <= 30 && !showEncouragement) {
+        setShowEncouragement(true);
+        setTimeout(() => setShowEncouragement(false), 3000);
+      }
     }
-  }, [onChange]);
+  }, [onChange, showEncouragement]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -98,7 +121,7 @@ export default function ConfidenceSlider({
           <div className="h-4 bg-gray-200 rounded-full relative overflow-hidden cursor-pointer touch-manipulation">
             {/* Progress fill */}
             <div 
-              className={`h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full ${
+              className={`h-full bg-gradient-to-r ${getSliderColor(value)} rounded-full ${
                 isDragging || isTransitioning 
                   ? 'transition-none' 
                   : 'transition-all duration-300 ease-out'
@@ -139,6 +162,21 @@ export default function ConfidenceSlider({
       }`}>
         {value}% confident
       </p>
+
+      {/* Encouragement Popup */}
+      {showEncouragement && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white border-2 border-purple-200 rounded-xl p-6 shadow-xl max-w-sm mx-4 animate-bounce">
+          <div className="text-center">
+            <div className="text-3xl mb-3">🤗</div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Don't worry, you are not alone!
+            </h3>
+            <p className="text-gray-600 text-sm">
+              We are here for you to get you back on track! 💪
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
