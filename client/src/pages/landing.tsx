@@ -66,7 +66,7 @@ export default function Landing() {
 
       <div className="page-container">
         <div className="content-section bg-white rounded-lg shadow-sm">
-          <form onSubmit={handleSubmit} className="form-section">
+          <div className="form-section">
             <input
               type="email"
               placeholder="Enter your email"
@@ -82,14 +82,7 @@ export default function Landing() {
               onChange={(e) => setWhatsapp(e.target.value)}
               className="form-input"
             />
-            <button
-              type="submit"
-              disabled={createUserMutation.isPending}
-              className="w-full btn-purple py-4"
-            >
-              {createUserMutation.isPending ? "Creating Account..." : "Start My Career Reset Journey"}
-            </button>
-          </form>
+          </div>
 
           <ConfidenceSlider
             value={confidence}
@@ -116,6 +109,16 @@ export default function Landing() {
             </div>
           </div>
         </div>
+        
+        <form onSubmit={handleSubmit} className="page-container">
+          <button
+            type="submit"
+            disabled={createUserMutation.isPending}
+            className="w-full btn-purple py-4"
+          >
+            {createUserMutation.isPending ? "Creating Account..." : "Start My Career Reset Journey"}
+          </button>
+        </form>
       </div>
 
       {/* Email Validation Modal */}
