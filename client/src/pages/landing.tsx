@@ -66,31 +66,6 @@ export default function Landing() {
 
       <div className="page-container">
         <div className="content-section bg-white rounded-lg shadow-sm">
-          <ConfidenceSlider
-            value={confidence}
-            onChange={setConfidence}
-            label="How confident are you about your career direction?"
-          />
-
-          <div className="component-card component-card-padding bg-white">
-            <p className="font-medium mb-4 text-responsive-base text-gray-900">How long have you been preparing for a career change?</p>
-            <div className="card-grid-2">
-              {timeframeOptions.map((option) => (
-                <button
-                  key={option}
-                  onClick={() => handleTimeframeClick(option)}
-                  className={`p-3 border rounded-lg text-sm transition-colors ${
-                    timeframe === option
-                      ? "border-purple-600 bg-purple-50 text-purple-600"
-                      : "border-gray-200 hover:border-purple-600 text-gray-700 hover:text-gray-900"
-                  }`}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <form onSubmit={handleSubmit} className="form-section">
             <input
               type="email"
@@ -115,6 +90,31 @@ export default function Landing() {
               {createUserMutation.isPending ? "Creating Account..." : "Start My Career Reset Journey"}
             </button>
           </form>
+
+          <ConfidenceSlider
+            value={confidence}
+            onChange={setConfidence}
+            label="How confident are you about your career direction?"
+          />
+
+          <div className="component-card component-card-padding bg-white">
+            <p className="font-medium mb-4 text-responsive-base text-gray-900">How long have you been preparing for a career change?</p>
+            <div className="card-grid-2">
+              {timeframeOptions.map((option) => (
+                <button
+                  key={option}
+                  onClick={() => handleTimeframeClick(option)}
+                  className={`p-3 border rounded-lg text-sm transition-colors ${
+                    timeframe === option
+                      ? "border-purple-600 bg-purple-50 text-purple-600"
+                      : "border-gray-200 hover:border-purple-600 text-gray-700 hover:text-gray-900"
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
