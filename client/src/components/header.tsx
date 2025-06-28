@@ -111,7 +111,7 @@ export default function Header({
           <div className="mt-6 md:mt-8 flex items-start space-x-4 md:space-x-6">
             <div className="flex-shrink-0">
               <div className="header-icon-container">
-                <span className="text-xl md:text-2xl">{icon || "🚀"}</span>
+                <span className="text-xl md:text-2xl">{icon || "💼"}</span>
               </div>
             </div>
             <div className="flex-1 min-w-0">
